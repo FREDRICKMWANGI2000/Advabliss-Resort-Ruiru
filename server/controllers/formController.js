@@ -3,7 +3,51 @@ const { Resend } = require("resend");
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 exports.contactForm = async (req, res) => {
-  // contact form
+
+  try {
+
+    const {
+      name,
+      phone,
+      email,
+      message,
+    } = req.body;
+
+    await resend.emails.send({
+
+      from: "onboarding@resend.dev",
+
+      to: "mwangifr123@gmail.com",
+
+      subject: "New Contact Message",
+
+      html: `
+        <h2>New Contact Message</h2>
+
+        <p><strong>Name:</strong> ${name}</p>
+
+        <p><strong>Phone:</strong> ${phone}</p>
+
+        <p><strong>Email:</strong> ${email}</p>
+
+        <p><strong>Message:</strong> ${message}</p>
+      `,
+    });
+
+    res.json({
+      success: true,
+      message: "Message sent successfully",
+    });
+
+  } catch (error) {
+
+    console.log(error);
+
+    res.status(500).json({
+      success: false,
+      message: "Failed to send message",
+    });
+  }
 };
 
 exports.accommodationForm = async (req, res) => {
