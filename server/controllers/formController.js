@@ -183,11 +183,7 @@ exports.meetingForm = async (req, res) => {
   }
 };
 
-const { Resend } = require("resend");
-
-const resend = new Resend(process.env.RESEND_API_KEY);
-
-export const subscribe = async (req, res) => {
+exports.subscribe = async (req, res) => {
   try {
     const { email } = req.body;
 
