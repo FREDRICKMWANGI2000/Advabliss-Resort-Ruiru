@@ -182,3 +182,36 @@ exports.meetingForm = async (req, res) => {
     });
   }
 };
+
+import { Resend } from "resend";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+export const subscribe = async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    await resend.emails.send({
+      from: "onboarding@resend.dev",
+      to: "mwangifr123@gmail.com",
+      subject: "New Subscriber",
+      html: `
+        <h2>New Subscription</h2>
+        <p>Email: ${email}</p>
+      `,
+    });
+
+    res.status(200).json({
+      message: "Subscribed successfully",
+    });
+
+  } catch (error) {
+    console.log(error);
+
+    res.status(500).json({
+      message: "Something went wrong",
+    });
+  }
+};
+
+
