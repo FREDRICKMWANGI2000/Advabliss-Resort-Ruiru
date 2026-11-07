@@ -1,0 +1,208 @@
+/* ==========================================================================
+   ADVABLISS RESORT RUIRU — LUXURY BRANDED PAGE LOADER
+   ========================================================================== */
+
+.page-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background-color: #1A2E1A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              visibility 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: auto;
+  user-select: none;
+}
+
+.page-loader--fade-out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.page-loader__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 24px;
+}
+
+/* Emblem & Spinner concentric container */
+.page-loader__emblem-wrap {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 22px;
+}
+
+/* Refined continuous rotating gold spinner ring */
+.page-loader__spinner {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1.5px solid rgba(215, 165, 29, 0.16);
+  border-top-color: #D7A51D;
+  border-right-color: rgba(215, 165, 29, 0.85);
+  animation: pageLoaderSpin 1.25s linear infinite,
+             pageLoaderPulse 2.5s ease-in-out infinite alternate;
+}
+
+/* Ambient glow halo behind emblem */
+.page-loader__halo {
+  position: absolute;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(215, 165, 29, 0.22) 0%, transparent 70%);
+  animation: pageLoaderHalo 2s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+/* Central circular emblem crest */
+.page-loader__logo-box {
+  position: relative;
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #1A2E1A;
+  border: 1px solid rgba(215, 165, 29, 0.32);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+}
+
+.page-loader__logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Editorial Brand Lockup */
+.page-loader__brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  margin-bottom: 16px;
+}
+
+.page-loader__brand-title {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 500;
+  color: #F5EFE0;
+  letter-spacing: 0.04em;
+  line-height: 1.15;
+}
+
+.page-loader__brand-sub {
+  font-family: var(--font-body);
+  font-size: 9.5px;
+  font-weight: 600;
+  color: #D7A51D;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+/* Small Elegant Caption */
+.page-loader__caption {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(245, 239, 224, 0.72);
+}
+
+.page-loader__dots {
+  display: inline-flex;
+  width: 14px;
+  margin-left: 2px;
+}
+
+.page-loader__dots .dot {
+  display: inline-block;
+  opacity: 0;
+  animation: pageLoaderDot 1.4s infinite;
+}
+
+.page-loader__dots .dot--1 {
+  animation-delay: 0s;
+}
+
+.page-loader__dots .dot--2 {
+  animation-delay: 0.25s;
+}
+
+.page-loader__dots .dot--3 {
+  animation-delay: 0.5s;
+}
+
+/* Keyframes */
+@keyframes pageLoaderSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pageLoaderPulse {
+  0% {
+    opacity: 0.75;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes pageLoaderHalo {
+  0% {
+    transform: scale(0.92);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(1.08);
+    opacity: 0.85;
+  }
+}
+
+@keyframes pageLoaderDot {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .page-loader {
+    transition: opacity 0.15s ease;
+  }
+  .page-loader__spinner,
+  .page-loader__halo,
+  .page-loader__dots .dot {
+    animation: none;
+    opacity: 1;
+  }
+}

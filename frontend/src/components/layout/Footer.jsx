@@ -1,50 +1,100 @@
 import React from 'react';
-import { Phone, Mail, MapPin, Instagram, Facebook, Twitter, } from 'lucide-react';
-import { FaTiktok } from 'react-icons/fa';
+import {
+  Phone,
+  Mail,
+  MapPin,
+  Instagram,
+  Facebook,
+  Twitter,
+  Music2,
+  Calendar,
+} from 'lucide-react';
 import { NAV_LINKS, CONTACT_INFO } from '../../data/siteData';
 import './Footer.css';
+import logo from '../images/logo.webp';
 
 export default function Footer({ onBookNow }) {
   const scrollTo = (id) => {
     const el = document.getElementById(id);
     if (el) {
-      window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+      window.scrollTo({
+        top: el.getBoundingClientRect().top + window.scrollY - 82,
+        behavior: 'smooth',
+      });
     }
   };
 
   const year = new Date().getFullYear();
 
   return (
-    <footer className="footer">
+    <footer className="footer aura-surface-dark">
       <div className="footer__top">
         <div className="container footer__grid">
-          {/* Brand */}
+          {/* Brand Column */}
           <div className="footer__brand">
             <div className="footer__logo">
-              <span className="footer__logo-icon">✦</span>
+              <span className="navbar__crest-wrap">
+                <img src={logo} alt="AdvaBliss Resort" className="navbar__crest" />
+              </span>
               <div>
                 <div className="footer__logo-main">AdvaBliss</div>
-                <div className="footer__logo-sub">Resort & Events</div>
+                <div className="footer__logo-sub">Resort · Ruiru</div>
               </div>
             </div>
             <p className="footer__tagline">
-              Where luxury meets nature — an immersive hospitality experience crafted for moments that last a lifetime.
+              An intimate garden and lakeside sanctuary in Ruiru — crafted for restful stays, seasonal dining, and landmark celebrations.
             </p>
             <div className="footer__socials">
-              <a href={CONTACT_INFO.socials.instagram} className="footer__social" aria-label="Instagram"><Instagram size={18} /></a>
-              <a href={CONTACT_INFO.socials.facebook} className="footer__social" aria-label="Facebook"><Facebook size={18} /></a>
-              <a href={CONTACT_INFO.socials.twitter} className="footer__social" aria-label="Twitter"><Twitter size={18} /></a>
-              <a href={CONTACT_INFO.socials.tiktok} className="footer__social" aria-label="TikTok"><FaTiktok size={18} /></a>
+              <a
+                href={CONTACT_INFO.socials.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer__social"
+                aria-label="Instagram"
+              >
+                <Instagram size={17} />
+              </a>
+              <a
+                href={CONTACT_INFO.socials.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer__social"
+                aria-label="Facebook"
+              >
+                <Facebook size={17} />
+              </a>
+              <a
+                href={CONTACT_INFO.socials.twitter}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer__social"
+                aria-label="Twitter"
+              >
+                <Twitter size={17} />
+              </a>
+              <a
+                href={CONTACT_INFO.socials.tiktok}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer__social"
+                aria-label="TikTok"
+              >
+                <Music2 size={17} />
+              </a>
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Navigation Column */}
           <div className="footer__col">
-            <h4 className="footer__col-title">Quick Links</h4>
+            <h4 className="footer__col-title">Explore</h4>
             <ul className="footer__nav">
-              {NAV_LINKS.map(link => (
+              {NAV_LINKS.map((link) => (
                 <li key={link.id}>
-                  <button className="footer__nav-link" onClick={() => scrollTo(link.id)}>
+                  <button
+                    type="button"
+                    className="footer__nav-link"
+                    onClick={() => scrollTo(link.id)}
+                  >
                     {link.label}
                   </button>
                 </li>
@@ -52,23 +102,37 @@ export default function Footer({ onBookNow }) {
             </ul>
           </div>
 
-          {/* Services */}
+          {/* Experiences Column */}
           <div className="footer__col">
-            <h4 className="footer__col-title">Services</h4>
+            <h4 className="footer__col-title">Experiences</h4>
             <ul className="footer__nav">
-              {['Luxury Accommodation','Fine Dining','Wedding Packages','Corporate Events','Garden Hire','Activities & Games','Virtual Tours','Concierge Service'].map(s => (
-                <li key={s}><span className="footer__nav-link footer__nav-text">{s}</span></li>
+              {[
+                'Garden View & Deluxe Suites',
+                'Family Paradise Residences',
+                'The Garden Room & Terrace Bar',
+                'Garden Weddings & Receptions',
+                'Executive Corporate Retreats',
+                'Canopy Rope Bridge & Ziplining',
+                'Lakeside Boat Excursions',
+                'Private Grounds Hire',
+              ].map((s) => (
+                <li key={s}>
+                  <span className="footer__nav-link footer__nav-text">{s}</span>
+                </li>
               ))}
             </ul>
           </div>
 
-          {/* Contact */}
+          {/* Concierge Desk Column */}
           <div className="footer__col">
-            <h4 className="footer__col-title">Get in Touch</h4>
+            <h4 className="footer__col-title">Reservations Desk</h4>
             <div className="footer__contact">
-              <a href={`tel:${CONTACT_INFO.phone}`} className="footer__contact-item">
+              <a
+                href={`tel:${CONTACT_INFO.phone.replace(/\s+/g, '')}`}
+                className="footer__contact-item"
+              >
                 <Phone size={15} />
-                <span>{CONTACT_INFO.phone}</span>
+                <span>{CONTACT_INFO.phoneDisplay}</span>
               </a>
               <a href={`mailto:${CONTACT_INFO.email}`} className="footer__contact-item">
                 <Mail size={15} />
@@ -79,8 +143,9 @@ export default function Footer({ onBookNow }) {
                 <span>{CONTACT_INFO.address}</span>
               </div>
             </div>
-            <button className="btn btn-gold footer__cta" onClick={onBookNow}>
-              Book Now
+            <button type="button" className="btn btn-gold footer__cta" onClick={onBookNow}>
+              <Calendar size={14} />
+              <span>Reserve Now</span>
             </button>
           </div>
         </div>
@@ -89,20 +154,21 @@ export default function Footer({ onBookNow }) {
       <div className="footer__bottom">
         <div className="container footer__bottom-inner">
           <p className="footer__copy">
-            © {year} AdvaBliss Resort & Events. All rights reserved.
+            © {year} AdvaBliss Resort Ruiru. All rights reserved.
           </p>
           <div className="footer__legal">
             <span>Privacy Policy</span>
-            <span>•</span>
-            <span>Terms & Conditions</span>
-            <span>•</span>
-           <a
-  href="https://wa.me/254794400999?text=Hello%2C%20I%20hope%20you%27re%20doing%20well.%20I%20would%20like%20some%20assistance%20with%20a%20project.%20Please%20let%20me%20know%20when%20you%20are%20available.%20Thank%20you!"
+            <span>·</span>
+            <span>Terms of Stay</span>
+            <span>·</span>
+            <a
+  href="https://fredifytechnologies.co.ke"
   target="_blank"
   rel="noopener noreferrer"
   className="footer__credit"
+  aria-label="Website designed by FredifyTechnologies"
 >
-  Designed By <strong>CODE WITH FRED</strong>
+  Designed By <strong>FredifyTechnologies</strong>
 </a>
           </div>
         </div>

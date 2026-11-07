@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Calendar, MapPin, Clock, Ticket } from 'lucide-react';
+import { Calendar, MapPin, Clock, Ticket, Sparkles, ArrowUpRight } from 'lucide-react';
 import { FEATURED_EVENT } from '../../data/siteData';
+import { SplitText, GradientText, AnimatedContent, ScrollExpandImage } from '../ui/ReactBits';
 import './FeaturedEvent.css';
-import backg from "../images/lakeview.png";
 
 function useCountdown(targetDate) {
-  const [timeLeft, setTimeLeft] = useState({});
+  const [timeLeft, setTimeLeft] = useState({
+    expired: false,
+    months: 0,
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
 
   useEffect(() => {
     const calc = () => {
@@ -14,7 +21,14 @@ function useCountdown(targetDate) {
       const diff = target - now;
 
       if (diff <= 0) {
-        setTimeLeft({ months: 0, days: 0, hours: 0, minutes: 0, seconds: 0 });
+        setTimeLeft({
+          expired: true,
+          months: 0,
+          days: 0,
+          hours: 0,
+          minutes: 0,
+          seconds: 0,
+        });
         return;
       }
 
@@ -24,7 +38,7 @@ function useCountdown(targetDate) {
       const hours = Math.floor((totalSeconds % (24 * 3600)) / 3600);
       const minutes = Math.floor((totalSeconds % 3600) / 60);
       const seconds = totalSeconds % 60;
-      setTimeLeft({ months, days, hours, minutes, seconds });
+      setTimeLeft({ expired: false, months, days, hours, minutes, seconds });
     };
 
     calc();
@@ -49,82 +63,118 @@ export default function FeaturedEvent() {
   const timeLeft = useCountdown(ev.date);
 
   const formatDate = (d) =>
-    new Date(d).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+    new Date(d).toLocaleDateString('en-GB', {
+      weekday: 'long',
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    });
   const formatTime = (d) =>
     new Date(d).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
 
   return (
-    <section id="featured-event" className="featured-event">
-      <div className="featured-event__bg">
-        <img src={backg} alt={ev.title} className="featured-event__bg-img" />
-        <div className="featured-event__overlay" />
-      </div>
-
+    <section id="featured-event" className="featured-event aura-surface-dark aura-grain section-pad">
       <div className="container featured-event__inner">
-        <div className="featured-event__badge">
-          <span className="pulse-dot" />
-          Upcoming Event
-        </div>
 
-        <div className="featured-event__content">
-          <div className="featured-event__left">
-            <span className="section-label" style={{ color: 'var(--gold-light)' }}>{ev.subtitle}</span>
-            <h2 className="featured-event__title">{ev.title}</h2>
-            <div className="divider-gold" />
+        <div className="featured-event__layout">
+          {/* Left Editorial Poster & Details */}
+          <AnimatedContent className="featured-event__left">
+            <h2 className="featured-event__title">
+              <SplitText text="The Afternoon Bliss Party" delay={45} />
+              <span className="featured-event__season">
+                <GradientText> — Season 8</GradientText>
+              </span>
+            </h2>
+
             <p className="featured-event__desc">{ev.description}</p>
 
             <div className="featured-event__meta">
               <div className="featured-event__meta-item">
-                <Calendar size={16} />
-                <span>{formatDate(ev.date)}</span>
+                <Calendar size={16} strokeWidth={1.75} />
+                <div>
+                  <span className="featured-event__meta-lbl">Date</span>
+                  <span className="featured-event__meta-val">{formatDate(ev.date)}</span>
+                </div>
               </div>
+
               <div className="featured-event__meta-item">
-                <Clock size={16} />
-                <span>Doors open at {formatTime(ev.date)}</span>
+                <Clock size={16} strokeWidth={1.75} />
+                <div>
+                  <span className="featured-event__meta-lbl">Gates Open</span>
+                  <span className="featured-event__meta-val">{formatTime(ev.date)} EAT</span>
+                </div>
               </div>
+
               <div className="featured-event__meta-item">
-                <MapPin size={16} />
-                <span>{ev.location}</span>
+                <MapPin size={16} strokeWidth={1.75} />
+                <div>
+                  <span className="featured-event__meta-lbl">Venue</span>
+                  <span className="featured-event__meta-val">{ev.location}</span>
+                </div>
               </div>
             </div>
 
-            <a
-              href={ev.ticketUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-gold featured-event__ticket-btn"
-            >
-              <Ticket size={18} />
-              Buy Tickets
-            </a>
-          </div>
+            <div className="featured-event__actions">
+              <a
+                href={ev.ticketUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-gold featured-event__ticket-btn"
+              >
+                <Ticket size={16} />
+                <span>Acquire Tickets</span>
+                <ArrowUpRight size={15} />
+              </a>
 
-          <div className="featured-event__right">
-            <div className="featured-event__countdown-box">
-              <p className="countdown__heading">Event Starts In</p>
-              <div className="countdown__grid">
-                <CountdownUnit value={timeLeft.months} label="Months" />
-                <span className="countdown__sep">:</span>
-                <CountdownUnit value={timeLeft.days} label="Days" />
-                <span className="countdown__sep">:</span>
-                <CountdownUnit value={timeLeft.hours} label="Hours" />
-                <span className="countdown__sep">:</span>
-                <CountdownUnit value={timeLeft.minutes} label="Mins" />
-                <span className="countdown__sep">:</span>
-                <CountdownUnit value={timeLeft.seconds} label="Secs" />
-              </div>
-              <div className="countdown__footer">
-                <a
-                  href={ev.ticketUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-outline-gold countdown__cta"
-                >
-                  Secure Your Spot
-                </a>
+              <a
+                href="#accommodation"
+                className="btn btn-outline-gold-light"
+              >
+                <span>Explore Event Stay Package</span>
+              </a>
+            </div>
+          </AnimatedContent>
+
+          {/* Right Photographic Frame & Live Countdown */}
+          <AnimatedContent delay={150} className="featured-event__right">
+            <div className="featured-event__visual-card">
+              <ScrollExpandImage
+                src={ev.image}
+                alt={ev.title}
+                className="featured-event__photo"
+              />
+
+              <div className="featured-event__countdown-panel">
+                <div className="countdown__header">
+                </div>
+
+                <div className="countdown__grid">
+                  <CountdownUnit value={timeLeft.months} label="Months" />
+                  <span className="countdown__sep">:</span>
+                  <CountdownUnit value={timeLeft.days} label="Days" />
+                  <span className="countdown__sep">:</span>
+                  <CountdownUnit value={timeLeft.hours} label="Hours" />
+                  <span className="countdown__sep">:</span>
+                  <CountdownUnit value={timeLeft.minutes} label="Mins" />
+                  <span className="countdown__sep">:</span>
+                  <CountdownUnit value={timeLeft.seconds} label="Secs" />
+                </div>
+
+                <div className="countdown__footer">
+                  <span>Live Afro-Pop, Gengetone, Gospel &amp; Benga · Garden Light Show</span>
+                  <a
+                    href={ev.ticketUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="editorial-link light"
+                  >
+                    <span>HustleSasa Box Office</span>
+                    <ArrowUpRight size={14} />
+                  </a>
+                </div>
               </div>
             </div>
-          </div>
+          </AnimatedContent>
         </div>
       </div>
     </section>

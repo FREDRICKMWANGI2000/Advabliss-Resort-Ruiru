@@ -121,6 +121,7 @@ exports.restaurantForm = async (req, res) => {
       occasion,
       phone,
       email,
+      requests,
     } = req.body;
 
     console.log(req.body);
@@ -144,11 +145,13 @@ exports.restaurantForm = async (req, res) => {
 
         <p><strong>Guests:</strong> ${guests}</p>
 
-        <p><strong>Occasion:</strong> ${occasion}</p>
+        <p><strong>Occasion / Space:</strong> ${occasion}</p>
 
         <p><strong>Phone:</strong> ${phone}</p>
 
         <p><strong>Email:</strong> ${email}</p>
+
+        <p><strong>Special Requests:</strong> ${requests || 'None'}</p>
       `,
     });
 
@@ -175,12 +178,21 @@ exports.meetingForm = async (req, res) => {
     const {
       eventType,
       fullName,
+      name,
       email,
       phone,
       eventDate,
+      date,
       guests,
       details,
+      message,
+      addons,
     } = req.body;
+
+    const resolvedName = fullName || name || "";
+    const resolvedDate = eventDate || date || "";
+    const resolvedDetails = details || message || "None";
+    const resolvedAddons = Array.isArray(addons) && addons.length > 0 ? addons.join(", ") : "None";
 
     console.log(req.body);
 
@@ -197,17 +209,19 @@ exports.meetingForm = async (req, res) => {
 
         <p><strong>Event Type:</strong> ${eventType}</p>
 
-        <p><strong>Name:</strong> ${fullName}</p>
+        <p><strong>Name:</strong> ${resolvedName}</p>
 
         <p><strong>Email:</strong> ${email}</p>
 
         <p><strong>Phone:</strong> ${phone}</p>
 
-        <p><strong>Event Date:</strong> ${eventDate}</p>
+        <p><strong>Event Date:</strong> ${resolvedDate}</p>
 
         <p><strong>Guests:</strong> ${guests}</p>
 
-        <p><strong>Details:</strong> ${details}</p>
+        <p><strong>Selected Add-Ons:</strong> ${resolvedAddons}</p>
+
+        <p><strong>Details:</strong> ${resolvedDetails}</p>
       `,
     });
 
@@ -242,6 +256,7 @@ exports.subscribe = async (req, res) => {
     });
 
     res.status(200).json({
+      success: true,
       message: "Subscribed successfully",
     });
 
@@ -249,6 +264,7 @@ exports.subscribe = async (req, res) => {
     console.log(error);
 
     res.status(500).json({
+      success: false,
       message: "Something went wrong",
     });
   }
