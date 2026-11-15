@@ -497,6 +497,9 @@ export const MENU_CATEGORIES = {
 export const EVENT_TYPES = [
   {
     id: 'wedding',
+    highlights: ["Open-sky ceremony lawns", "Evening reception under warm lighting", "Dedicated event coordinator"],
+    minGuests: 20,
+    maxGuests: 500,
     iconName: 'Heart',
     name: 'Weddings',
     capacity: '20–500 guests',
@@ -504,6 +507,9 @@ export const EVENT_TYPES = [
   },
   {
     id: 'corporate',
+    highlights: ["Modern audiovisual technology", "Breakout pergolas for sessions", "Full catering available"],
+    minGuests: 10,
+    maxGuests: 300,
     iconName: 'Briefcase',
     name: 'Corporate Events',
     capacity: '10–300 guests',
@@ -511,6 +517,9 @@ export const EVENT_TYPES = [
   },
   {
     id: 'private',
+    highlights: ["Garden pavilions & waterside lounges", "Birthdays, graduations & reunions", "Flexible, intimate layouts"],
+    minGuests: 10,
+    maxGuests: 200,
     iconName: 'Sparkles',
     name: 'Private Parties',
     capacity: '10–200 guests',
@@ -518,12 +527,19 @@ export const EVENT_TYPES = [
   },
   {
     id: 'garden',
+    highlights: ["Exclusive hire of the resort grounds", "Concerts, festivals & showcases", "Suited to large outdoor productions"],
+    minGuests: 50,
+    maxGuests: 1000,
     iconName: 'Trees',
     name: 'Garden Hire',
     capacity: '50–1000 guests',
     desc: 'Exclusive private hire of our expansive resort grounds for concerts, cultural showcases, festivals, and large-scale outdoor productions.',
   },
 ];
+
+// Currency helper — Kenyan Shillings, e.g. KSh 1,200
+export const formatKSh = (amount) =>
+  `KSh ${Number(amount || 0).toLocaleString('en-KE', { maximumFractionDigits: 0 })}`;
 
 export const EVENT_ADDONS = [
   { id: 'tent', iconName: 'Tent', name: 'Marquee Tent', price: 400 },

@@ -1,11 +1,12 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
+  "description": "AdvaBliss Resort API (forms & enquiries via Resend)",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
-    "start": "node index.js"
+    "start": "node index.js",
+    "check": "node --check index.js && node --check controllers/formController.js"
   },
   "keywords": [],
   "author": "",
@@ -16,5 +17,8 @@
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "resend": "^6.12.3"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }

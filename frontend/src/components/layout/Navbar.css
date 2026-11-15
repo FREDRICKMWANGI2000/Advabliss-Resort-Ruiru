@@ -376,13 +376,16 @@
   width: min(390px, 100vw);
   height: 100dvh;
   z-index: 1100;
-  display: none;
+  display: flex;
+  visibility: hidden;
   opacity: 0;
-  transform: translateX(100%);
+  /* clip-path (not translateX) so the closed drawer never creates horizontal overflow */
+  clip-path: inset(0 0 0 100%);
   pointer-events: none;
   transition:
-    transform 0.4s var(--ease-editorial),
-    opacity 0.4s var(--ease-editorial);
+    clip-path 0.45s var(--ease-editorial),
+    opacity 0.4s var(--ease-editorial),
+    visibility 0s linear 0.4s;
   flex-direction: column;
   padding: 24px 26px 28px;
   overflow-y: auto;
@@ -390,9 +393,10 @@
 }
 
 .mobile-menu--open {
-  display: flex;
+  visibility: visible;
+  transition-delay: 0s;
   opacity: 1;
-  transform: translateX(0);
+  clip-path: inset(0 0 0 0);
   pointer-events: auto;
 }
 
@@ -522,6 +526,14 @@
   .navbar__link {
     font-size: 11px;
     padding: 8px 8px;
+  }
+}
+
+/* The drawer is a mobile-only component; never render it on desktop */
+@media (min-width: 981px) {
+  .mobile-menu,
+  .mobile-menu__backdrop {
+    display: none;
   }
 }
 
