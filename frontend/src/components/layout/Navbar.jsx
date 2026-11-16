@@ -280,7 +280,7 @@ export default function Navbar({ onBookNow }) {
 
       {/* Mobile Navigation Drawer */}
       <aside
-        className={`mobile-menu aura-surface-dark ${menuOpen ? 'mobile-menu--open' : ''}`}
+        className={`mobile-menu ${menuOpen ? 'mobile-menu--open' : ''}`}
         aria-hidden={!menuOpen}
         aria-label="Mobile navigation"
       >

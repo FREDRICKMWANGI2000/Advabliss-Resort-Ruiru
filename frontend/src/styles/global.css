@@ -829,7 +829,7 @@ h4, h5, h6 {
     --nav-height: 70px;
   }
   body {
-    padding-bottom: 68px; /* Space for non-obstructive mobile dock */
+    padding-bottom: calc(68px + env(safe-area-inset-bottom, 0px)); /* Space for mobile dock */
   }
   .container {
     padding: 0 18px;
@@ -837,6 +837,12 @@ h4, h5, h6 {
   .btn {
     padding: 13px 24px;
     font-size: 11px;
+  }
+  .toast {
+    bottom: calc(84px + env(safe-area-inset-bottom, 0px));
+    right: 16px;
+    left: 16px;
+    max-width: none;
   }
   .section-header {
     margin-bottom: 40px;
@@ -852,8 +858,8 @@ h4, h5, h6 {
     bottom: 0;
     left: 0;
     right: 0;
-    height: 68px;
-    padding: 10px 16px;
+    height: calc(68px + env(safe-area-inset-bottom, 0px));
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
     background: rgba(26, 46, 26, 0.97);
     backdrop-filter: blur(14px);
     border-top: 1px solid rgba(215, 165, 29, 0.28);

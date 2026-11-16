@@ -370,7 +370,14 @@
 
 /* Mobile Menu Drawer */
 .mobile-menu {
+  /* Own background (no .aura-surface-dark: its `position: relative` overrode
+     `fixed` and left the drawer in normal flow as an 844px blank block). */
   position: fixed;
+  background-color: var(--forest);
+  background-image:
+    radial-gradient(circle at 86% 78%, rgba(215, 165, 29, 0.14) 0%, transparent 52%),
+    linear-gradient(160deg, #1A2E1A 0%, #152515 52%, #1C1C1C 100%);
+  color: var(--cream);
   top: 0;
   right: 0;
   width: min(390px, 100vw);
