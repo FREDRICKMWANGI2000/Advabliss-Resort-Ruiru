@@ -968,18 +968,18 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  gap: 16px;
+  gap: 24px;
   min-width: 0;
   max-width: 100%;
 }
 
 .restaurant__res-photo-wrap {
   position: relative;
-  height: 220px;
-  border-radius: var(--radius-xs);
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 2px;
   overflow: hidden;
-  border: 1px solid rgba(215, 165, 29, 0.35);
-  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(215, 165, 29, 0.28);
   flex-shrink: 0;
 }
 
@@ -992,24 +992,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-.restaurant__res-logo-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2px 0 0;
-  flex-shrink: 0;
-}
-
-.restaurant__res-logo {
-  width: 110px;
-  height: 110px;
-  aspect-ratio: 1 / 1;
-  object-fit: contain;
-  display: block;
-  border-radius: 6px;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.28);
+  object-position: center;
 }
 
 .restaurant__res-promises {
@@ -1020,36 +1003,70 @@
 
 .restaurant__res-promises-title {
   font-family: var(--font-display);
-  font-size: 1.85rem;
+  font-size: clamp(1.85rem, 2.3vw, 2.25rem);
+  font-weight: 600;
   color: var(--cream);
-  margin-bottom: 6px;
-  line-height: 1.2;
+  margin-bottom: 10px;
+  line-height: 1.15;
 }
 
 .restaurant__res-promises-desc {
-  font-size: 13px;
-  color: rgba(245, 239, 224, 0.75);
-  line-height: 1.65;
-  margin-bottom: 16px;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(245, 239, 224, 0.86);
+  line-height: 1.75;
+  margin-bottom: 20px;
 }
 
 .restaurant__res-promises-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 13px;
 }
 
 .restaurant__res-promises-list li {
   display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 12px;
-  color: rgba(245, 239, 224, 0.85);
+  align-items: flex-start;
+  gap: 11px;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.55;
+  color: rgba(245, 239, 224, 0.92);
 }
 
 .restaurant__res-promises-list svg {
   color: var(--gold);
   flex-shrink: 0;
+  margin-top: 3px;
+}
+
+/* Signature Editorial Hospitality Statement */
+.restaurant__res-statement {
+  margin-top: auto;
+  padding-top: 24px;
+  border-top: 1px solid rgba(215, 165, 29, 0.24);
+}
+
+.restaurant__res-quote {
+  font-family: var(--font-display);
+  font-size: clamp(1.45rem, 2vw, 1.75rem);
+  font-weight: 500;
+  line-height: 1.28;
+  color: var(--cream);
+  margin: 0;
+}
+
+.restaurant__res-quote-accent {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.restaurant__res-statement-sub {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.75;
+  color: rgba(245, 239, 224, 0.78);
+  margin-top: 12px;
 }
 
 /* Form Container */
@@ -1306,14 +1323,10 @@
     padding: 26px 18px;
   }
   .restaurant__res-visual {
-    gap: 14px;
+    gap: 20px;
   }
-  .restaurant__res-photo-wrap {
-    height: 190px;
-  }
-  .restaurant__res-logo {
-    width: 95px;
-    height: 95px;
+  .restaurant__res-statement {
+    padding-top: 20px;
   }
   .restaurant__form-grid {
     grid-template-columns: minmax(0, 1fr);

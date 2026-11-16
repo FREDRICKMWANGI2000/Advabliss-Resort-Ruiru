@@ -7,8 +7,8 @@ import bouncingCastleImg from '../components/images/bouncing-castle.webp';
 import jetskiImg from '../components/images/jetski.webp';
 import zipliningImg from '../components/images/ziplining.webp';
 import resortPoolImg from '../components/images/resort-pool.webp';
-import gardenDiningImg from '../components/images/garden-dining.webp';
-import gardenBanquetImg from '../components/images/garden-banquet.webp';
+import gardenDiningImg from '../components/images/garden-dining.png';
+import gardenBanquetImg from '../components/images/event.png';
 import tableImg from '../components/images/table.webp';
 import minigolfImg from '../components/images/minigolf.webp';
 
@@ -54,7 +54,7 @@ export const NAV_LINKS = [
 
 // ===== ACTIVITIES NAVIGATION DROPDOWN LINKS =====
 export const ACTIVITIES_LINKS = [
-  { id: 'swimming-pool', name: 'Swimming & Pool', target: 'activities-pool' },
+  { id: 'swimming-pool', name: 'Swimming & Pool', target: 'activity-swimming-pool' },
   { id: 'boat-riding', name: 'Lakeside Boat Riding', target: 'activity-boat-riding' },
   { id: 'jetski', name: 'Water Sports & Jet Skiing', target: 'activity-jetski' },
   { id: 'rope-bridge', name: 'Canopy Rope Bridge', target: 'activity-rope-bridge' },

@@ -4,8 +4,6 @@ import {
   X,
   Phone,
   Calendar,
-  MapPin,
-  ArrowUpRight,
   ChevronDown,
 } from 'lucide-react';
 import { NAV_LINKS, ACTIVITIES_LINKS, CONTACT_INFO } from '../../data/siteData';
@@ -44,7 +42,7 @@ export default function Navbar({ onBookNow }) {
   // Scroll-spy for active navigation tracking across all sections
   useEffect(() => {
     if (typeof IntersectionObserver === 'undefined') return;
-    const sectionIds = ['home', 'accommodation', 'restaurant', 'events', 'activities', 'activities-pool', 'offers', 'virtual-tour', 'contact'];
+    const sectionIds = ['home', 'accommodation', 'restaurant', 'events', 'activities', 'offers', 'virtual-tour', 'contact'];
     const elements = sectionIds
       .map((id) => document.getElementById(id))
       .filter(Boolean);
@@ -101,7 +99,6 @@ export default function Navbar({ onBookNow }) {
 
   const isActivitiesActive =
     activeSection === 'activities' ||
-    activeSection === 'activities-pool' ||
     activeSection.startsWith('activity-');
 
   return (
@@ -305,7 +302,7 @@ export default function Navbar({ onBookNow }) {
         </div>
 
         <ul className="mobile-menu__links">
-          {NAV_LINKS.map((link, i) => {
+          {NAV_LINKS.map((link) => {
             if (link.id === 'activities') {
               return (
                 <li key={link.id} className="mobile-menu__item--accordion">
@@ -315,7 +312,6 @@ export default function Navbar({ onBookNow }) {
                       className={`mobile-menu__link ${isActivitiesActive ? 'mobile-menu__link--active' : ''}`}
                       onClick={() => scrollTo(link.id)}
                     >
-                      <span className="mobile-menu__index">0{i + 1}</span>
                       <span className="mobile-menu__label">{link.label}</span>
                     </button>
                     <button
@@ -343,7 +339,7 @@ export default function Navbar({ onBookNow }) {
                             scrollTo(item.target);
                           }}
                         >
-                          <span>{item.name}</span>
+                          {item.name}
                         </button>
                       ))}
                     </div>
@@ -353,15 +349,13 @@ export default function Navbar({ onBookNow }) {
             }
 
             return (
-              <li key={link.id} style={{ transitionDelay: `${i * 35}ms` }}>
+              <li key={link.id}>
                 <button
                   type="button"
                   className={`mobile-menu__link ${activeSection === link.id ? 'mobile-menu__link--active' : ''}`}
                   onClick={() => scrollTo(link.id)}
                 >
-                  <span className="mobile-menu__index">0{i + 1}</span>
                   <span className="mobile-menu__label">{link.label}</span>
-                  <ArrowUpRight size={15} className="mobile-menu__arrow" />
                 </button>
               </li>
             );
@@ -378,18 +372,23 @@ export default function Navbar({ onBookNow }) {
             }}
           >
             <Calendar size={15} />
-            <span>Reserve Your Experience</span>
+            <span>Book Your Experience</span>
           </button>
 
           <div className="mobile-menu__contact">
-            <a href={`tel:${CONTACT_INFO.phone.replace(/\s+/g, '')}`} className="mobile-menu__tel">
-              <Phone size={14} />
+            <a href={`tel:${CONTACT_INFO.phone.replace(/\s+/g, '')}`} className="mobile-menu__contact-link">
+              <Phone size={13} />
               <span>{CONTACT_INFO.phoneDisplay}</span>
             </a>
-            <span className="mobile-menu__loc">
-              <MapPin size={14} />
-              <span>{CONTACT_INFO.address}</span>
-            </span>
+            <span className="mobile-menu__contact-sep" aria-hidden="true">·</span>
+            <a
+              href={CONTACT_INFO.socials.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mobile-menu__contact-link"
+            >
+              <span>WhatsApp</span>
+            </a>
           </div>
         </div>
       </aside>

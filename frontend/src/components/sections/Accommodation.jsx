@@ -180,7 +180,6 @@ export default function Accommodation() {
                   }}
                 >
                   <div className="accom__card-media">
-                    {room.badge && <span className="accom__badge">{room.badge}</span>}
                     <ScrollExpandImage
                       src={room.image}
                       alt={room.name}
@@ -200,14 +199,11 @@ export default function Accommodation() {
                     <h3 className="accom__card-name">{room.name}</h3>
                     <p className="accom__card-desc">{room.description}</p>
 
-                    <ul className="accom__feature-list" aria-label={`${room.name} amenities`}>
-                      {room.features.map((f) => (
-                        <li key={f} className="accom__feature-pill">
-                          <Check size={11} />
-                          <span>{f}</span>
-                        </li>
-                      ))}
-                    </ul>
+                    {room.features?.length > 0 && (
+                      <p className="accom__amenities" aria-label={`${room.name} amenities`}>
+                        {room.features.join(' · ')}
+                      </p>
+                    )}
 
                     <div className="accom__card-footer">
                       <div className="accom__price">

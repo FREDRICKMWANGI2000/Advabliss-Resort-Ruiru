@@ -4,7 +4,7 @@ import { SplitText, GradientText } from '../ui/ReactBits';
 import './Events.css';
 import lakesideImg from '../images/lakeside-seating.webp';
 import gardenBanquetImg from '../images/garden-banquet.webp';
-import gardenDiningImg from '../images/garden-dining.webp';
+import gardenDiningImg from '../images/garden-dining.png';
 import poolImg from '../images/resort-pool.webp';
 import entranceImg from '../images/advabliss-entrance.webp';
 

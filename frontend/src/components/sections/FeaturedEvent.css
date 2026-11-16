@@ -9,51 +9,29 @@
   z-index: 2;
 }
 
-.featured-event__top-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding-bottom: 24px;
-  margin-bottom: 48px;
-  border-bottom: 1px solid rgba(245, 239, 224, 0.14);
-  flex-wrap: wrap;
-}
-
-.featured-event__badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--gold);
-}
-
-.featured-event__edition {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 16px;
-  color: rgba(245, 239, 224, 0.72);
-}
-
 .featured-event__layout {
   display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
-  gap: 64px;
+  grid-template-columns: 1.02fr 0.98fr;
+  gap: 72px;
   align-items: center;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.featured-event__editorial {
+  position: relative;
+  z-index: 2;
   min-width: 0;
   max-width: 100%;
 }
 
 .featured-event__title {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 4.4vw, 4rem);
+  font-size: clamp(2.15rem, 4.3vw, 3.85rem);
   font-weight: 400;
   color: var(--cream);
   line-height: 1.06;
-  margin-bottom: 24px;
+  margin-bottom: 18px;
   word-break: break-word;
 }
 
@@ -62,22 +40,77 @@
   display: inline-block;
 }
 
-.featured-event__desc {
-  font-size: 15px;
-  color: rgba(245, 239, 224, 0.8);
-  line-height: 1.85;
-  margin-bottom: 36px;
-  max-width: 560px;
+.featured-event__programme {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.05rem, 1.35vw, 1.25rem);
+  color: var(--gold);
+  letter-spacing: 0.02em;
+  margin-bottom: 20px;
 }
 
+.featured-event__desc {
+  font-size: 14.5px;
+  color: rgba(245, 239, 224, 0.78);
+  line-height: 1.85;
+  margin-bottom: 34px;
+  max-width: 540px;
+}
+
+/* Sophisticated Horizontal Serif Countdown */
+.featured-event__countdown {
+  padding: 22px 0;
+  margin-bottom: 28px;
+  border-top: 1px solid rgba(215, 165, 29, 0.24);
+  border-bottom: 1px solid rgba(215, 165, 29, 0.24);
+}
+
+.countdown__grid {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+}
+
+.countdown__unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  min-width: 48px;
+}
+
+.countdown__value {
+  font-family: var(--font-display);
+  font-variant-numeric: lining-nums tabular-nums;
+  font-size: clamp(2rem, 3.1vw, 2.85rem);
+  font-weight: 400;
+  color: var(--cream);
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+
+.countdown__label {
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(245, 239, 224, 0.54);
+}
+
+.countdown__sep {
+  width: 1px;
+  height: 30px;
+  background: rgba(215, 165, 29, 0.34);
+  flex-shrink: 0;
+}
+
+/* Event Metadata */
 .featured-event__meta {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-  padding: 24px 0;
-  margin-bottom: 36px;
-  border-top: 1px solid rgba(245, 239, 224, 0.14);
-  border-bottom: 1px solid rgba(245, 239, 224, 0.14);
+  margin-bottom: 34px;
 }
 
 .featured-event__meta-item {
@@ -89,16 +122,16 @@
 .featured-event__meta-item svg {
   color: var(--gold);
   flex-shrink: 0;
-  margin-top: 3px;
+  margin-top: 2px;
 }
 
 .featured-event__meta-lbl {
   display: block;
-  font-size: 10px;
+  font-size: 9.5px;
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: rgba(245, 239, 224, 0.52);
+  color: rgba(245, 239, 224, 0.5);
   margin-bottom: 3px;
 }
 
@@ -106,169 +139,189 @@
   font-size: 13px;
   font-weight: 500;
   color: var(--cream);
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
+/* Ticket & Stay Actions */
 .featured-event__actions {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 26px;
   flex-wrap: wrap;
 }
 
-/* Right Visual & Countdown Panel */
-.featured-event__visual-card {
-  border: 1px solid rgba(215, 165, 29, 0.3);
-  background: rgba(18, 30, 18, 0.72);
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-  box-shadow: var(--shadow-hero);
+.featured-event__ticket-btn {
+  transition: transform 0.35s var(--ease-editorial), box-shadow 0.35s var(--ease-editorial), background-color 0.35s var(--ease-editorial);
 }
 
-.featured-event__photo {
-  height: 290px;
+.featured-event__ticket-arrow {
+  transition: transform 0.35s var(--ease-editorial);
 }
 
-.featured-event__photo img {
+.featured-event__ticket-btn:hover .featured-event__ticket-arrow {
+  transform: translate(3px, -3px);
+}
+
+/* Sculpted Organic Photograph Composition */
+.featured-event__visual {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 0;
+}
+
+.featured-event__organic-stage {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  aspect-ratio: 1 / 0.96;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.featured-event__organic-halo {
+  position: absolute;
+  inset: -4% -2% -5% -4%;
+  border-radius: 52% 48% 61% 39% / 44% 53% 47% 56%;
+  background: rgba(212, 145, 11, 0.905);
+  transform: rotate(-4deg);
+  pointer-events: none;
+}
+
+.featured-event__organic-ring {
+  position: absolute;
+  inset: -2% -3% 1% 2%;
+  border-radius: 44% 56% 52% 48% / 58% 41% 59% 42%;
+  border: 1px solid rgb(223, 222, 222);
+  pointer-events: none;
+  animation: organicDrift 18s ease-in-out infinite alternate;
+}
+
+.featured-event__organic-mask {
+  position: relative;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center 38%;
-}
-
-.featured-event__countdown-panel {
-  padding: 32px;
-}
-
-.countdown__header {
+  padding: 6%;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  margin-bottom: 22px;
+  border-radius: 59% 41% 47% 53% / 43% 57% 43% 57%;
+  overflow: hidden;
+  transition: transform 0.8s var(--ease-editorial), border-radius 0.8s var(--ease-editorial);
 }
 
-.countdown__heading {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--gold);
+.featured-event__organic-img {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center;
 }
 
-.countdown__grid {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding-bottom: 24px;
-  margin-bottom: 22px;
-  border-bottom: 1px solid rgba(245, 239, 224, 0.12);
+@keyframes organicDrift {
+  0% {
+    transform: rotate(0deg) scale(1);
+    border-radius: 44% 56% 52% 48% / 58% 41% 59% 42%;
+  }
+  100% {
+    transform: rotate(4deg) scale(1.015);
+    border-radius: 51% 49% 43% 57% / 46% 55% 45% 54%;
+  }
 }
 
-.countdown__unit {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  min-width: 60px;
+@media (prefers-reduced-motion: reduce) {
+  .featured-event__organic-ring {
+    animation: none;
+  }
+  .featured-event__organic-mask,
+  .featured-event__organic-img,
+  .featured-event__ticket-btn,
+  .featured-event__ticket-arrow {
+    transition: none;
+  }
+  .featured-event__organic-stage:hover .featured-event__organic-img,
+  .featured-event__ticket-btn:hover .featured-event__ticket-arrow {
+    transform: none;
+  }
 }
 
-.countdown__value {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 3.2vw, 2.75rem);
-  font-weight: 400;
-  color: var(--cream);
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(215, 165, 29, 0.25);
-  border-radius: var(--radius-xs);
-  padding: 10px 12px;
-  line-height: 1;
-  min-width: 60px;
-  text-align: center;
-}
-
-.countdown__label {
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: rgba(245, 239, 224, 0.55);
-}
-
-.countdown__sep {
-  font-family: var(--font-display);
-  font-size: 1.6rem;
-  color: var(--gold);
-  margin-bottom: 18px;
-}
-
-.countdown__footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
-  font-size: 12px;
-  color: rgba(245, 239, 224, 0.65);
-}
-
+/* Tablet & Below: Vertical Editorial Recomposition */
 @media (max-width: 1024px) {
   .featured-event__layout {
     grid-template-columns: 1fr;
-    gap: 48px;
+    gap: 44px;
+  }
+  .featured-event__visual {
+    order: -1;
+  }
+  .featured-event__organic-stage {
+    max-width: 440px;
+    aspect-ratio: 1 / 0.9;
   }
 }
 
+/* Mobile Layout */
 @media (max-width: 768px) {
   .featured-event__layout {
-    grid-template-columns: 1fr;
     gap: 36px;
   }
-  .featured-event__left,
-  .featured-event__right {
-    min-width: 0;
-    max-width: 100%;
+  .featured-event__organic-stage {
+    max-width: 360px;
+    aspect-ratio: 1 / 0.88;
+  }
+  .featured-event__desc {
+    margin-bottom: 26px;
+  }
+  .featured-event__countdown {
+    padding: 18px 0;
+    margin-bottom: 24px;
+  }
+  .countdown__grid {
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .countdown__unit {
+    min-width: 42px;
+  }
+  .countdown__value {
+    font-size: 1.75rem;
+  }
+  .countdown__label {
+    font-size: 8.5px;
+    letter-spacing: 0.12em;
+  }
+  .countdown__sep {
+    height: 22px;
   }
   .featured-event__meta {
     grid-template-columns: 1fr;
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+  .featured-event__actions {
+    flex-direction: column;
+    align-items: stretch;
     gap: 16px;
   }
-  .featured-event__countdown-panel {
-    padding: 24px 14px;
-  }
-  .countdown__grid {
-    gap: 6px;
-    flex-wrap: wrap;
-  }
-  .countdown__unit,
-  .countdown__value {
-    min-width: 44px;
-  }
-  .countdown__value {
-    font-size: 1.45rem;
-    padding: 7px 6px;
-  }
-  .countdown__sep {
-    font-size: 1.2rem;
-    margin-bottom: 12px;
-  }
-  .countdown__footer {
-    flex-direction: column;
-    text-align: center;
+  .featured-event__ticket-btn {
+    width: 100%;
+    min-height: 48px;
+    justify-content: center;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 420px) {
   .featured-event__title {
-    font-size: 1.85rem;
+    font-size: 1.9rem;
   }
-  .countdown__unit,
-  .countdown__value {
-    min-width: 38px;
+  .countdown__unit {
+    min-width: 36px;
   }
   .countdown__value {
-    font-size: 1.25rem;
-    padding: 6px 4px;
+    font-size: 1.5rem;
   }
 }

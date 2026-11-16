@@ -30,7 +30,6 @@ import { SplitText, GradientText, AnimatedContent, ScrollExpandImage } from '../
 import './Restaurant.css';
 
 import tableImg from '../images/table.webp';
-import logo1Img from '../images/logo1.png';
 import gardenDiningImg from '../images/garden-dining.png';
 import lakesideSeatingImg from '../images/lakeside-seating.webp';
 
@@ -739,18 +738,6 @@ export default function Restaurant() {
               />
             </div>
 
-            {/* Centered Brand Signature Logo */}
-            <div className="restaurant__res-logo-wrap">
-              <img
-                src={logo1Img}
-                alt="AdvaBliss Resort Emblem"
-                className="restaurant__res-logo"
-                width="110"
-                height="110"
-                loading="lazy"
-              />
-            </div>
-
             <div className="restaurant__res-promises">
               <h4 className="restaurant__res-promises-title">The Table Experience</h4>
               <p className="restaurant__res-promises-desc">
@@ -770,6 +757,16 @@ export default function Restaurant() {
                   <span>Dedicated table attendant &amp; direct concierge confirmation</span>
                 </li>
               </ul>
+            </div>
+
+            <div className="restaurant__res-statement">
+              <blockquote className="restaurant__res-quote">
+                Every gathering deserves a{' '}
+                <em className="restaurant__res-quote-accent">setting worth remembering</em>.
+              </blockquote>
+              <p className="restaurant__res-statement-sub">
+                From intimate family lunches to special celebrations, we bring thoughtful details, warm hospitality and beautifully prepared surroundings together to make every visit memorable.
+              </p>
             </div>
           </div>
 

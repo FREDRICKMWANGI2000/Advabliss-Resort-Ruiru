@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Calendar, MapPin, Clock, Ticket, Sparkles, ArrowUpRight } from 'lucide-react';
+import { Calendar, MapPin, Clock, Ticket, ArrowUpRight } from 'lucide-react';
 import { FEATURED_EVENT } from '../../data/siteData';
-import { SplitText, GradientText, AnimatedContent, ScrollExpandImage } from '../ui/ReactBits';
+import { SplitText, GradientText, AnimatedContent } from '../ui/ReactBits';
 import './FeaturedEvent.css';
 
 function useCountdown(targetDate) {
@@ -75,10 +75,11 @@ export default function FeaturedEvent() {
   return (
     <section id="featured-event" className="featured-event aura-surface-dark aura-grain section-pad">
       <div className="container featured-event__inner">
-
         <div className="featured-event__layout">
-          {/* Left Editorial Poster & Details */}
-          <AnimatedContent className="featured-event__left">
+          {/* Editorial Event Details & Countdown */}
+          <AnimatedContent className="featured-event__editorial">
+            <span className="section-eyebrow light">{ev.subtitle}</span>
+
             <h2 className="featured-event__title">
               <SplitText text="The Afternoon Bliss Party" delay={45} />
               <span className="featured-event__season">
@@ -86,11 +87,30 @@ export default function FeaturedEvent() {
               </span>
             </h2>
 
+            <p className="featured-event__programme">
+              Live Afro-Pop, Gengetone, Gospel &amp; Benga · Garden Light Show
+            </p>
+
             <p className="featured-event__desc">{ev.description}</p>
+
+            {/* Sophisticated Horizontal Serif Countdown */}
+            <div className="featured-event__countdown" aria-label="Event countdown">
+              <div className="countdown__grid">
+                <CountdownUnit value={timeLeft.months} label="Months" />
+                <span className="countdown__sep" aria-hidden="true" />
+                <CountdownUnit value={timeLeft.days} label="Days" />
+                <span className="countdown__sep" aria-hidden="true" />
+                <CountdownUnit value={timeLeft.hours} label="Hours" />
+                <span className="countdown__sep" aria-hidden="true" />
+                <CountdownUnit value={timeLeft.minutes} label="Mins" />
+                <span className="countdown__sep" aria-hidden="true" />
+                <CountdownUnit value={timeLeft.seconds} label="Secs" />
+              </div>
+            </div>
 
             <div className="featured-event__meta">
               <div className="featured-event__meta-item">
-                <Calendar size={16} strokeWidth={1.75} />
+                <Calendar size={15} strokeWidth={1.6} />
                 <div>
                   <span className="featured-event__meta-lbl">Date</span>
                   <span className="featured-event__meta-val">{formatDate(ev.date)}</span>
@@ -98,7 +118,7 @@ export default function FeaturedEvent() {
               </div>
 
               <div className="featured-event__meta-item">
-                <Clock size={16} strokeWidth={1.75} />
+                <Clock size={15} strokeWidth={1.6} />
                 <div>
                   <span className="featured-event__meta-lbl">Gates Open</span>
                   <span className="featured-event__meta-val">{formatTime(ev.date)} EAT</span>
@@ -106,7 +126,7 @@ export default function FeaturedEvent() {
               </div>
 
               <div className="featured-event__meta-item">
-                <MapPin size={16} strokeWidth={1.75} />
+                <MapPin size={15} strokeWidth={1.6} />
                 <div>
                   <span className="featured-event__meta-lbl">Venue</span>
                   <span className="featured-event__meta-val">{ev.location}</span>
@@ -122,56 +142,23 @@ export default function FeaturedEvent() {
                 className="btn btn-gold featured-event__ticket-btn"
               >
                 <Ticket size={16} />
-                <span>Acquire Tickets</span>
-                <ArrowUpRight size={15} />
-              </a>
-
-              <a
-                href="#accommodation"
-                className="btn btn-outline-gold-light"
-              >
-                <span>Explore Event Stay Package</span>
+                <span>HustleSasa Box Office</span>
+                <ArrowUpRight size={15} className="featured-event__ticket-arrow" />
               </a>
             </div>
           </AnimatedContent>
 
-          {/* Right Photographic Frame & Live Countdown */}
-          <AnimatedContent delay={150} className="featured-event__right">
-            <div className="featured-event__visual-card">
-              <ScrollExpandImage
-                src={ev.image}
-                alt={ev.title}
-                className="featured-event__photo"
-              />
-
-              <div className="featured-event__countdown-panel">
-                <div className="countdown__header">
-                </div>
-
-                <div className="countdown__grid">
-                  <CountdownUnit value={timeLeft.months} label="Months" />
-                  <span className="countdown__sep">:</span>
-                  <CountdownUnit value={timeLeft.days} label="Days" />
-                  <span className="countdown__sep">:</span>
-                  <CountdownUnit value={timeLeft.hours} label="Hours" />
-                  <span className="countdown__sep">:</span>
-                  <CountdownUnit value={timeLeft.minutes} label="Mins" />
-                  <span className="countdown__sep">:</span>
-                  <CountdownUnit value={timeLeft.seconds} label="Secs" />
-                </div>
-
-                <div className="countdown__footer">
-                  <span>Live Afro-Pop, Gengetone, Gospel &amp; Benga · Garden Light Show</span>
-                  <a
-                    href={ev.ticketUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="editorial-link light"
-                  >
-                    <span>HustleSasa Box Office</span>
-                    <ArrowUpRight size={14} />
-                  </a>
-                </div>
+          {/* Sculpted Organic Event Photograph */}
+          <AnimatedContent delay={140} className="featured-event__visual">
+            <div className="featured-event__organic-stage">
+              <div className="featured-event__organic-halo" aria-hidden="true" />
+              <div className="featured-event__organic-ring" aria-hidden="true" />
+              <div className="featured-event__organic-mask">
+                <img
+                  src={ev.image}
+                  alt={ev.title}
+                  className="featured-event__organic-img"
+                />
               </div>
             </div>
           </AnimatedContent>
