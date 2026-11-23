@@ -70,7 +70,7 @@ export default function PageLoader() {
         {/* Brand Text Lockup */}
         <div className="page-loader__brand">
           <span className="page-loader__brand-title">AdvaBliss</span>
-          <span className="page-loader__brand-sub">Resort · Ruiru</span>
+          <span className="page-loader__brand-sub">Resort in Ruiru</span>
         </div>
 
         {/* Elegant Loading Caption in Montserrat */}

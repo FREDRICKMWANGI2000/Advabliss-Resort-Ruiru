@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: advabliss-api
+    runtime: node
+    plan: free
+    rootDir: server
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: RESEND_API_KEY
+        sync: false
+      - key: RESORT_EMAIL
+        value: fredifytechnologies@gmail.com
+      - key: MAIL_FROM
+        sync: false
+      - key: RESEND_CONTACT_TEMPLATE_ID
+        value: website-enquiry-notification
+      - key: RESEND_ACCOMMODATION_TEMPLATE_ID
+        value: reservation-inquiry
+      - key: RESEND_RESTAURANT_TEMPLATE_ID
+        value: table-reservation-notice
+      - key: CORS_ORIGINS
+        value: https://advabliss.com,https://www.advabliss.com

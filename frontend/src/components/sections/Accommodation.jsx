@@ -9,7 +9,7 @@ import {
   AlertCircle,
   CheckCircle2,
 } from 'lucide-react';
-import { ACCOMMODATIONS, CONTACT_INFO } from '../../data/siteData';
+import { formatKSh, ACCOMMODATIONS, CONTACT_INFO } from '../../data/siteData';
 import { SplitText, GradientText, AnimatedContent, ScrollExpandImage } from '../ui/ReactBits';
 import './Accommodation.css';
 import axios from 'axios';
@@ -143,11 +143,10 @@ export default function Accommodation() {
         {/* Editorial Split Section Header */}
         <div className="editorial-header-split">
           <div>
-            <span className="section-eyebrow">Residences &amp; Suites</span>
             <h2 className="section-title">
               <SplitText text="Restful Quarters Framed" delay={45} />{' '}
               <em>
-                <GradientText variant="dark">By Nature</GradientText>
+                  <span className="highlight-marker"><GradientText variant="dark">By Nature</GradientText></span>
               </em>
             </h2>
           </div>
@@ -210,7 +209,7 @@ export default function Accommodation() {
                         <span className="accom__price-from">Nightly Rate</span>
                         <div className="accom__price-line">
                           <span className="accom__price-val">
-                            KES {room.price.toLocaleString('en-KE')}
+                            {formatKSh(room.price)}
                           </span>
                           <span className="accom__price-per">/ night</span>
                         </div>
@@ -247,7 +246,6 @@ export default function Accommodation() {
         <div className="accom__desk" id="accommodation-form">
           {/* Left: Selected Residence Summary */}
           <div className="accom__desk-summary aura-surface-dark">
-            <span className="section-eyebrow light">Selected Residence</span>
             <h3 className="accom__summary-title">{activeRoom.name}</h3>
             <p className="accom__summary-desc">{activeRoom.description}</p>
 
@@ -266,11 +264,11 @@ export default function Accommodation() {
               </div>
               <div className="accom__ledger-row">
                 <span>Nightly Tariff</span>
-                <strong>KES {activeRoom.price.toLocaleString('en-KE')}</strong>
+                <strong>{formatKSh(activeRoom.price)}</strong>
               </div>
               <div className="accom__ledger-row accom__ledger-row--total">
                 <span>Estimated ({nightsCount} {nightsCount === 1 ? 'Night' : 'Nights'})</span>
-                <strong>KES {(activeRoom.price * nightsCount).toLocaleString('en-KE')}</strong>
+                <strong>{formatKSh(activeRoom.price * nightsCount)}</strong>
               </div>
             </div>
 
@@ -289,7 +287,6 @@ export default function Accommodation() {
           {/* Right: Reservation Form */}
           <div className="accom__desk-form-wrap">
             <div className="accom__form-header">
-              <span className="section-eyebrow">Reservation Desk</span>
               <h3 className="accom__form-title">Complete Your Stay Request</h3>
               <p className="accom__form-sub">
                 Submit your preferred dates and our reservations desk will confirm availability directly via email and phone.
@@ -373,7 +370,7 @@ export default function Accommodation() {
                       <option value="">— Select room or suite —</option>
                       {ACCOMMODATIONS.map((r) => (
                         <option key={r.id} value={r.id}>
-                          {r.name} — KES {r.price.toLocaleString('en-KE')} / night
+                          {r.name} — {formatKSh(r.price)} / night
                         </option>
                       ))}
                     </select>

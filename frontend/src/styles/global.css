@@ -125,6 +125,7 @@ h4, h5, h6 {
 
 /* ===== AURA LAYERED AMBIENT ATMOSPHERE ===== */
 .aura-surface-dark {
+  --editorial-marker: #C9A34B;
   position: relative;
   background-color: var(--forest);
   background-image:
@@ -136,6 +137,7 @@ h4, h5, h6 {
 }
 
 .aura-surface-cream {
+  --editorial-marker: #DDB64B;
   position: relative;
   background-color: var(--cream);
   background-image:
@@ -145,6 +147,7 @@ h4, h5, h6 {
 }
 
 .aura-surface-warm {
+  --editorial-marker: #E8CA57;
   position: relative;
   background-color: var(--white);
   background-image:
@@ -191,42 +194,6 @@ h4, h5, h6 {
 }
 
 /* ===== EDITORIAL SECTION HEADERS ===== */
-.section-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--forest-mid);
-  margin-bottom: 18px;
-}
-
-.section-eyebrow::before {
-  content: '';
-  width: 28px;
-  height: 1px;
-  background: var(--gold);
-  display: inline-block;
-}
-
-.section-eyebrow.light {
-  color: var(--gold);
-}
-
-.section-label {
-  font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--gold-light);
-  display: block;
-  margin-bottom: 14px;
-}
-
 .section-title {
   font-family: var(--font-display);
   font-size: clamp(2.4rem, 4.4vw, 4.1rem);
@@ -244,6 +211,28 @@ h4, h5, h6 {
 
 .section-title.light {
   color: var(--cream);
+}
+
+/* Inline marker background follows only the emphasized phrase, including wrapped lines. */
+.highlight-marker {
+  display: inline;
+  background-image: linear-gradient(
+    to bottom,
+    transparent 70%,
+    var(--editorial-marker, #DDB64B) 70%,
+    var(--editorial-marker, #DDB64B) 96%,
+    transparent 96%
+  );
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.gateway .highlight-marker {
+  --editorial-marker: #C9A34B;
+  color: var(--cream);
+  -webkit-text-fill-color: var(--cream);
 }
 
 .section-subtitle {
@@ -264,14 +253,6 @@ h4, h5, h6 {
 
 .section-header.center {
   text-align: center;
-}
-
-.section-header.center .section-eyebrow::after {
-  content: '';
-  width: 28px;
-  height: 1px;
-  background: var(--gold);
-  display: inline-block;
 }
 
 .section-header.center .section-subtitle {
@@ -550,27 +531,6 @@ h4, h5, h6 {
 @keyframes rbGradientShift {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
-}
-
-/* 2. ShinyText */
-.rb-shiny-text {
-  display: inline-block;
-  background: linear-gradient(
-    120deg,
-    rgba(245, 239, 224, 0.78) 38%,
-    #FFFFFF 50%,
-    rgba(245, 239, 224, 0.78) 62%
-  );
-  background-size: 220% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: rbShine 6s linear infinite;
-}
-
-@keyframes rbShine {
-  0% { background-position: 120% 0; }
-  100% { background-position: -120% 0; }
 }
 
 /* 3. SplitText & BlurText */

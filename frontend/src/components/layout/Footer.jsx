@@ -38,7 +38,7 @@ export default function Footer({ onBookNow }) {
               </span>
               <div>
                 <div className="footer__logo-main">AdvaBliss</div>
-                <div className="footer__logo-sub">Resort · Ruiru</div>
+                <div className="footer__logo-sub">Resort in Ruiru</div>
               </div>
             </div>
             <p className="footer__tagline">
@@ -158,9 +158,7 @@ export default function Footer({ onBookNow }) {
           </p>
           <div className="footer__legal">
             <span>Privacy Policy</span>
-            <span>·</span>
             <span>Terms of Stay</span>
-            <span>·</span>
             <a
   href="https://fredifytechnologies.co.ke"
   target="_blank"

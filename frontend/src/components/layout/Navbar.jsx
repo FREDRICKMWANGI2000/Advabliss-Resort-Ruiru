@@ -122,7 +122,7 @@ export default function Navbar({ onBookNow }) {
             </span>
             <span className="navbar__brand-text">
               <span className="navbar__brand-name">AdvaBliss</span>
-              <span className="navbar__brand-sub">Resort · Ruiru</span>
+              <span className="navbar__brand-sub">Resort in Ruiru</span>
             </span>
           </button>
 
@@ -288,7 +288,7 @@ export default function Navbar({ onBookNow }) {
             </span>
             <span className="navbar__brand-text">
               <span className="navbar__brand-name">AdvaBliss</span>
-              <span className="navbar__brand-sub">Resort · Ruiru</span>
+              <span className="navbar__brand-sub">Resort in Ruiru</span>
             </span>
           </div>
           <button
@@ -380,7 +380,6 @@ export default function Navbar({ onBookNow }) {
               <Phone size={13} />
               <span>{CONTACT_INFO.phoneDisplay}</span>
             </a>
-            <span className="mobile-menu__contact-sep" aria-hidden="true">·</span>
             <a
               href={CONTACT_INFO.socials.whatsapp}
               target="_blank"

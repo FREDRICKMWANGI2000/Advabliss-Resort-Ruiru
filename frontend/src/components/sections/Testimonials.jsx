@@ -19,11 +19,10 @@ export default function Testimonials() {
     <section className="testimonials aura-surface-dark aura-grain section-pad">
       <div className="container testimonials__inner">
         <div className="section-header center">
-          <span className="section-eyebrow light">Guest Reflections</span>
           <h2 className="section-title light">
             <SplitText text="Words From Those" delay={45} />{' '}
             <em>
-              <GradientText>We Have Hosted</GradientText>
+              <span className="highlight-marker"><GradientText>We Have Hosted</GradientText></span>
             </em>
           </h2>
         </div>

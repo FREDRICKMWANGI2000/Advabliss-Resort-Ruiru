@@ -71,38 +71,11 @@
   transform: scale(1.05);
 }
 
-.activities__index {
-  position: absolute;
-  top: 14px;
-  left: 14px;
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 14px;
-  color: var(--cream);
-  background: rgba(26, 46, 26, 0.85);
-  border: 1px solid rgba(215, 165, 29, 0.4);
-  padding: 4px 10px;
-  border-radius: var(--radius-xs);
-  backdrop-filter: blur(4px);
-}
-
 .activities__copy {
   padding: 26px 26px 28px;
   display: flex;
   flex-direction: column;
   flex: 1;
-}
-
-.activities__kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 10.5px;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--gold-light);
-  margin-bottom: 10px;
 }
 
 .activities__name {
@@ -139,12 +112,6 @@
 
 .activities__meta svg {
   color: var(--gold-light);
-}
-
-.activities__price-tag {
-  margin-left: auto;
-  font-weight: 600;
-  color: var(--forest);
 }
 
 @media (max-width: 1080px) {

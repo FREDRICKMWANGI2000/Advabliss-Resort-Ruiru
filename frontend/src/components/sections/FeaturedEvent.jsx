@@ -78,7 +78,6 @@ export default function FeaturedEvent() {
         <div className="featured-event__layout">
           {/* Editorial Event Details & Countdown */}
           <AnimatedContent className="featured-event__editorial">
-            <span className="section-eyebrow light">{ev.subtitle}</span>
 
             <h2 className="featured-event__title">
               <SplitText text="The Afternoon Bliss Party" delay={45} />
@@ -88,7 +87,7 @@ export default function FeaturedEvent() {
             </h2>
 
             <p className="featured-event__programme">
-              Live Afro-Pop, Gengetone, Gospel &amp; Benga · Garden Light Show
+              Live Afro-Pop, Gengetone, Gospel &amp; Benga, with a garden light show
             </p>
 
             <p className="featured-event__desc">{ev.description}</p>

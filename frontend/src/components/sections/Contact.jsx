@@ -92,11 +92,10 @@ export default function Contact() {
       <div className="container">
         <div className="editorial-header-split">
           <div>
-            <span className="section-eyebrow">Direct Concierge</span>
             <h2 className="section-title">
               <SplitText text="Connect With" delay={45} />{' '}
               <em>
-                <GradientText variant="dark">AdvaBliss Ruiru</GradientText>
+                <span className="highlight-marker"><GradientText variant="dark">AdvaBliss Ruiru</GradientText></span>
               </em>
             </h2>
           </div>
@@ -198,7 +197,6 @@ export default function Contact() {
           {/* Right: Direct Message Form */}
           <AnimatedContent delay={120} className="contact__right">
             <div className="contact__form-wrap">
-              <span className="section-eyebrow">Written Enquiry</span>
               <h3 className="contact__form-title">Send Us a Message</h3>
               <p className="contact__form-sub">
                 Tell us about your upcoming stay, group dining request, or celebration plans.

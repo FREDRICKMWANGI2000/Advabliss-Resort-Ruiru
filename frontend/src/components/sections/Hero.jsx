@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { ArrowDown, ArrowUpRight, ChevronLeft, ChevronRight, Compass, MapPin } from 'lucide-react';
+import { ArrowDown, ArrowUpRight, ChevronLeft, ChevronRight, Compass } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -19,28 +19,28 @@ const STORY_PHOTOS = [
     id: 'lakeside',
     image: slideLakeside,
     alt: 'Lakeside canopy lounge seating beside the water at Advabliss Resort',
-    chapter: '01 / Waterfront',
+    chapter: 'Waterfront',
     title: 'A quieter side of Ruiru',
   },
   {
     id: 'pool',
     image: slidePool,
     alt: 'The authentic Advabliss Resort swimming pool and tiled sun deck',
-    chapter: '02 / Poolside',
+    chapter: 'Poolside',
     title: 'Time to slow down',
   },
   {
     id: 'entrance',
     image: slideEntrance,
     alt: 'Advabliss Resort entrance sign, canopy and open gates',
-    chapter: '03 / Your arrival',
+    chapter: 'Your arrival',
     title: 'A warm welcome awaits',
   },
   {
     id: 'rope-bridge',
     image: slideRopeBridge,
     alt: 'The resort’s rope bridge crossing above the water',
-    chapter: '04 / Adventure',
+    chapter: 'Adventure',
     title: 'Follow the water’s edge',
   },
 ];
@@ -153,8 +153,7 @@ export default function Hero({ onBookNow }) {
         </div>
 
         <div className="gateway__copy">
-          <div className="gateway__eyebrow"><MapPin size={13} /> Ruiru, Kenya <span /> A garden &amp; lakeside sanctuary</div>
-          <h1>Arrive somewhere<br /><em>beautifully unexpected.</em></h1>
+          <h1>Arrive somewhere<br /><em><span className="highlight-marker">beautifully unexpected.</span></em></h1>
           <p>Step through our garden gates into a quieter pace, warm Kenyan hospitality, and days shaped by water, greenery, and good company.</p>
           <div className="gateway__actions">
             <button type="button" className="btn btn-gold" onClick={onBookNow}>Reserve your stay <ArrowUpRight size={16} /></button>
@@ -173,7 +172,6 @@ export default function Hero({ onBookNow }) {
         <button type="button" className="gateway__scroll-cue" onClick={() => scrollToSection('sanctuary-story')} aria-label="Scroll to discover the resort">
           <span>Enter the sanctuary</span><span className="gateway__scroll-icon"><ArrowDown size={15} /></span>
         </button>
-        <span className="gateway__index" aria-hidden="true">ADVA / RUIRU <i>01 — 03</i></span>
         <span className="gateway__cursor" ref={cursorRef} aria-hidden="true">Explore</span>
       </section>
 
@@ -181,8 +179,7 @@ export default function Hero({ onBookNow }) {
         <div className="container">
           <div className="story__grid">
             <AnimatedContent className="story__narrative">
-              <span className="section-eyebrow">{RESORT_STORY.eyebrow}</span>
-              <h2 className="section-title story__headline">{RESORT_STORY.headline}{' '}<em><GradientText variant="dark">{RESORT_STORY.headlineAccent}</GradientText></em></h2>
+              <h2 className="section-title story__headline">{RESORT_STORY.headline}{' '}<em><span className="highlight-marker"><GradientText variant="dark">{RESORT_STORY.headlineAccent}</GradientText></span></em></h2>
               <p className="story__lead">{RESORT_STORY.lead}</p>
               <p className="story__body">{RESORT_STORY.body}</p>
               <div className="story__metrics">{RESORT_STORY.highlights.map((item) => <div key={item.label} className="story__metric"><span className="story__metric-val"><CountUp end={item.value} suffix={item.suffix} /></span><span className="story__metric-lbl">{item.label}</span></div>)}</div>
@@ -214,14 +211,14 @@ export default function Hero({ onBookNow }) {
                       key={photo.id}
                       type="button"
                       role="tab"
-                      aria-label={`Show ${photo.chapter.split(' / ')[1]} photograph`}
+                      aria-label={`Show ${photo.chapter} photograph`}
                       aria-selected={index === storyPhotoIndex}
                       className={index === storyPhotoIndex ? 'is-active' : ''}
                       onClick={() => setStoryPhotoIndex(index)}
                     />
                   ))}
                 </div>
-                <span className="story-showcase__brand">AdvaBliss <i>·</i> Ruiru</span>
+
               </div>
             </div>
           </div>

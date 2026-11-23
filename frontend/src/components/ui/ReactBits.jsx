@@ -105,14 +105,6 @@ export function GradientText({ children, className = '', variant = 'gold' }) {
 }
 
 /**
- * React Bits — ShinyText
- * Subtle metallic shimmer for occasional overlines and badges.
- */
-export function ShinyText({ children, className = '' }) {
-  return <span className={`rb-shiny-text ${className}`}>{children}</span>;
-}
-
-/**
  * React Bits — AnimatedContent / ScrollReveal
  * Smooth section & block entrance on scroll.
  */

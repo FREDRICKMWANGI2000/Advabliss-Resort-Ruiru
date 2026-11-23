@@ -33,11 +33,10 @@ export default function Events() {
     <section id="events" className="events aura-surface-cream">
       <div className="container events__body section-pad">
         <header className="events__intro">
-          <span className="section-eyebrow">Meetings &amp; Events</span>
           <h2 className="section-title">
             <SplitText text="Gather beneath" delay={45} />{' '}
             <em>
-              <GradientText>open skies</GradientText>
+              <span className="highlight-marker"><GradientText>open skies</GradientText></span>
             </em>
           </h2>
           <p className="section-subtitle">

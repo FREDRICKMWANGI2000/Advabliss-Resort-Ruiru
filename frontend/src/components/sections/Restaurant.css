@@ -37,24 +37,6 @@
   object-fit: cover;
 }
 
-.restaurant__intro-badge {
-  position: absolute;
-  bottom: 16px;
-  left: 16px;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 14px;
-  background: rgba(26, 46, 26, 0.88);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(215, 165, 29, 0.4);
-  border-radius: 999px;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  color: var(--gold);
-}
-
 .restaurant__intro-copy {
   display: flex;
   flex-direction: column;
@@ -193,30 +175,6 @@
   pointer-events: none;
 }
 
-.dish-card__kicker-tag {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 14px;
-  background: rgba(26, 46, 26, 0.88);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(215, 165, 29, 0.35);
-  border-radius: 999px;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--cream);
-  z-index: 2;
-}
-
-.dish-card__kicker-tag .dot {
-  color: var(--gold);
-}
-
 /* Right Column: Editorial Dish Information */
 .dish-showcase__info-wrap {
   display: flex;
@@ -228,22 +186,6 @@
 .dish-showcase__content {
   display: flex;
   flex-direction: column;
-}
-
-.dish-showcase__kicker {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 12px;
-}
-
-.dish-showcase__category {
-  font-size: 11.5px;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--gold-dark);
 }
 
 .dish-showcase__price {
@@ -756,18 +698,6 @@
   background: #FAF7F0;
 }
 
-.dish-lightbox__kicker {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--forest);
-  opacity: 0.75;
-}
-
 .dish-lightbox__header {
   display: flex;
   flex-direction: column;
@@ -888,15 +818,6 @@
   flex-direction: column;
   min-width: 0;
   max-width: 100%;
-}
-
-.restaurant__venue-eyebrow {
-  font-size: 11.5px;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--gold-dark);
-  margin-bottom: 8px;
 }
 
 .restaurant__venue-title {
@@ -1350,18 +1271,8 @@
     width: calc(100% - 18px);
     height: 270px;
   }
-  .dish-card__kicker-tag {
-    bottom: 12px;
-    left: 12px;
-    padding: 4px 10px;
-    font-size: 9.5px;
-  }
   .dish-showcase__title {
     font-size: 1.75rem;
-  }
-  .dish-showcase__kicker {
-    flex-wrap: wrap;
-    gap: 8px;
   }
   .dish-showcase__progress-bar {
     width: 60px;

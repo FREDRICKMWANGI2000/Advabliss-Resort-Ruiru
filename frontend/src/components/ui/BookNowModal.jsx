@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { X, BedDouble, UtensilsCrossed, CalendarHeart, Compass, ArrowUpRight, Phone } from 'lucide-react';
-import { CONTACT_INFO } from '../../data/siteData';
+import { CONTACT_INFO, formatKSh } from '../../data/siteData';
 import './BookNowModal.css';
 
 const ICON_MAP = {
@@ -46,7 +46,7 @@ export default function BookNowModal({ isOpen, onClose }) {
     {
       title: 'Rooms & Luxury Suites',
       desc: 'Reserve a Garden View Room, Deluxe Suite, Family Suite, or Event Stay',
-      meta: 'From KES 3,500 / night',
+      meta: `From ${formatKSh(3500)} / night`,
       section: 'accommodation',
     },
     {
@@ -64,7 +64,7 @@ export default function BookNowModal({ isOpen, onClose }) {
     {
       title: 'Games & Outdoor Activities',
       desc: 'Explore canopy rope bridges, ziplining, boat rides & all-day passes',
-      meta: 'Day Pass KES 1,500 / person',
+      meta: `Day Pass ${formatKSh(1500)} / person`,
       section: 'activities',
     },
   ];
@@ -88,7 +88,6 @@ export default function BookNowModal({ isOpen, onClose }) {
         </button>
 
         <div className="modal__header">
-          <span className="section-eyebrow">Concierge Desk</span>
           <h2 id="book-modal-title" className="modal__title">
             Begin Your <em>Reservation</em>
           </h2>

@@ -55,11 +55,10 @@ export default function VirtualTour() {
         {/* Editorial Split Header */}
         <div className="editorial-header-split">
           <div>
-            <span className="section-eyebrow">Visual Gallery</span>
             <h2 className="section-title">
               <SplitText text="Journey Through" delay={45} />{' '}
               <em>
-                <GradientText variant="dark">AdvaBliss</GradientText>
+                <span className="highlight-marker"><GradientText variant="dark">AdvaBliss</GradientText></span>
               </em>
             </h2>
           </div>
@@ -80,9 +79,6 @@ export default function VirtualTour() {
             />
             <div className="vt__viewer-overlay">
               <div className="vt__viewer-info">
-                <span className="vt__viewer-kicker">
-                  0{active + 1} / 0{TOUR_SPACES.length} · {space.category || 'Resort Grounds'}
-                </span>
                 <h3 className="vt__viewer-name">{space.name}</h3>
                 <p className="vt__viewer-desc">{space.desc}</p>
               </div>
@@ -140,7 +136,6 @@ export default function VirtualTour() {
         {/* Site Visit CTA Bar */}
         <AnimatedContent className="vt__cta-bar aura-surface-dark">
           <div className="vt__cta-text">
-            <span className="section-eyebrow light">Private Walkthrough</span>
             <h4>Experience the Grounds in Person</h4>
             <p>
               Arrange a complimentary guided site visit with our hospitality and events team in Ruiru.

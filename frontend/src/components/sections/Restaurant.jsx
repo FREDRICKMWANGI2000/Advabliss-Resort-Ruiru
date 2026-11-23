@@ -25,7 +25,7 @@ import {
   Maximize2,
 } from 'lucide-react';
 import gsap from 'gsap';
-import { FEATURED_DISHES, MENU_CATEGORIES, MENU_PRICING_METADATA, CONTACT_INFO } from '../../data/siteData';
+import { FEATURED_DISHES, MENU_CATEGORIES, formatKSh, CONTACT_INFO } from '../../data/siteData';
 import { SplitText, GradientText, AnimatedContent, ScrollExpandImage } from '../ui/ReactBits';
 import './Restaurant.css';
 
@@ -314,7 +314,7 @@ export default function Restaurant() {
             <h2 className="section-title">
               Restaurant &amp;{' '}
               <em>
-                <GradientText>Culinary Grounds</GradientText>
+                <span className="highlight-marker"><GradientText>Culinary Grounds</GradientText></span>
               </em>
             </h2>
           </div>
@@ -356,7 +356,7 @@ export default function Restaurant() {
                         onClick={isNext ? nextSlide : undefined}
                         role="group"
                         aria-roledescription="slide"
-                        aria-label={`${dish.name} - ${dish.price}`}
+                        aria-label={dish.name}
                       >
                         <div className="dish-card__media">
                           <img
@@ -366,11 +366,6 @@ export default function Restaurant() {
                             loading={idx === 0 ? 'eager' : 'lazy'}
                           />
                           <div className="dish-card__overlay" />
-                          <div className="dish-card__kicker-tag">
-                            <span>0{idx + 1}</span>
-                            <span className="dot" aria-hidden="true">·</span>
-                            <span>{dish.category}</span>
-                          </div>
                         </div>
                       </div>
                     );
@@ -382,10 +377,7 @@ export default function Restaurant() {
             {/* Right Column: Editorial Dish Information */}
             <div className="dish-showcase__info-wrap">
               <div className="dish-showcase__content" ref={dishContentRef}>
-                <div className="dish-showcase__kicker">
-                  <span className="dish-showcase__category">{currentDish.category}</span>
-                  <span className="dish-showcase__price">{currentDish.price}</span>
-                </div>
+                <span className="dish-showcase__price">{formatKSh(currentDish.price)}</span>
 
                 <h3 className="dish-showcase__title">{currentDish.name}</h3>
 
@@ -459,7 +451,6 @@ export default function Restaurant() {
         {isMenuExpanded && (
           <div className="restaurant__full-menu" ref={fullMenuSectionRef} id="complete-dining-menu">
             <div className="full-menu__masthead">
-              <span className="section-eyebrow">A Taste of Kenya · A La Carte</span>
               <h3 className="full-menu__title">Complete Dining Menu</h3>
               <p className="full-menu__sub">{activeMenuCategory.note}</p>
 
@@ -523,7 +514,7 @@ export default function Restaurant() {
                   <div className="menu-photo-card__info">
                     <div className="menu-photo-card__header">
                       <h4 className="menu-photo-card__title">{item.name}</h4>
-                      <span className="menu-photo-card__price">{item.price}</span>
+                      <span className="menu-photo-card__price">{item.price ? formatKSh(item.price) : 'Price on request'}</span>
                     </div>
                     <p className="menu-photo-card__desc">{item.desc}</p>
                   </div>
@@ -593,15 +584,9 @@ export default function Restaurant() {
 
               {/* Lightbox Content */}
               <div className="dish-lightbox__body">
-                <div className="dish-lightbox__kicker">
-                  <span className="dish-lightbox__category">{activeMenuCategory.label}</span>
-                  <span className="dish-lightbox__counter">
-                    0{lightboxIndex + 1} / 0{currentCategoryItems.length}
-                  </span>
-                </div>
                 <div className="dish-lightbox__header">
                   <h3 className="dish-lightbox__title">{lightboxDish.name}</h3>
-                  <span className="dish-lightbox__price">{lightboxDish.price}</span>
+                  <span className="dish-lightbox__price">{lightboxDish.price ? formatKSh(lightboxDish.price) : 'Price on request'}</span>
                 </div>
                 <p className="dish-lightbox__desc">{lightboxDish.desc}</p>
               </div>
@@ -614,7 +599,6 @@ export default function Restaurant() {
            ========================================================================= */}
         <div className="restaurant__venues">
           <div className="restaurant__venues-masthead">
-            <span className="section-eyebrow">Distinct Dining Spaces</span>
             <h3 className="restaurant__venues-heading">
               Our Dining <em>Venues</em>
             </h3>
@@ -634,7 +618,6 @@ export default function Restaurant() {
             </div>
 
             <div className="restaurant__venue-body">
-              <span className="restaurant__venue-eyebrow">Intimate Hospitality</span>
               <h4 className="restaurant__venue-title">The Garden Room &amp; Courtyard Gazebos</h4>
               <p className="restaurant__venue-desc">
                 Surrounded by verdant lawns and tranquil pine shade, our signature dining room features floor-to-ceiling glass and private wooden gazebos. Savor chef-curated seasonal tasting menus with dedicated fireside service.
@@ -684,7 +667,6 @@ export default function Restaurant() {
             </div>
 
             <div className="restaurant__venue-body">
-              <span className="restaurant__venue-eyebrow">Al Fresco Gathering</span>
               <h4 className="restaurant__venue-title">The Terrace &amp; Garden Bar</h4>
               <p className="restaurant__venue-desc">
                 Open-air terrace dining under our signature marquee pavilion and shaded lakeside canopies. Enjoy balmy evening breezes, chilled botanical spritzes, artisanal coffees, and wood-grilled plates through golden hour and beyond.
@@ -773,7 +755,6 @@ export default function Restaurant() {
           {/* Right Column: Functional Reservation Form */}
           <div className="restaurant__res-form-wrap">
             <div className="restaurant__res-form-header">
-              <span className="section-eyebrow">Table Concierge</span>
               <h3 className="restaurant__res-title">Reserve Your Table</h3>
               <p className="restaurant__res-sub">
                 Secure your preferred seating in The Garden Room, open-air terrace, or a secluded courtyard gazebo.

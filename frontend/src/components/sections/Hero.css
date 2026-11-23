@@ -30,8 +30,6 @@
 .gateway__gate--right { clip-path: inset(0 0 0 50%); }
 .gateway__gate--right img { position: absolute; left: 0; }
 .gateway__copy { position: relative; z-index: 2; width: min(760px, 68vw); margin: 4vh 0 0 clamp(32px, 9vw, 150px); }
-.gateway__eyebrow { display: flex; align-items: center; gap: 10px; color: var(--gold); font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; margin-bottom: 22px; }
-.gateway__eyebrow span { width: 24px; height: 1px; background: currentColor; }
 .gateway h1 { color: var(--cream); font-size: clamp(3.25rem, 6.4vw, 6rem); line-height: .92; letter-spacing: -.035em; font-weight: 300; margin-bottom: 25px; text-shadow: 0 3px 26px #0003; }
 .gateway h1 em, .gateway__reveal-copy em { color: #edcb70; font-weight: 400; }
 .gateway__copy p { max-width: 490px; margin-bottom: 29px; color: rgba(250,246,236,.86); font-size: 14px; line-height: 1.9; }
@@ -40,8 +38,6 @@
 .gateway__scroll-cue { position: absolute; z-index: 3; left: clamp(32px, 9vw, 150px); bottom: 38px; display: flex; align-items: center; gap: 13px; color: rgba(250,246,236,.85); font-size: 9px; font-weight: 600; letter-spacing: .17em; text-transform: uppercase; }
 .gateway__scroll-icon { display: grid; width: 36px; height: 36px; place-items: center; color: var(--gold); border: 1px solid rgba(215,165,29,.65); border-radius: 50%; transition: var(--transition); }
 .gateway__scroll-cue:hover .gateway__scroll-icon { background: var(--gold); color: var(--charcoal); transform: translateY(3px); }
-.gateway__index { position: absolute; bottom: 48px; right: 6vw; display: flex; align-items: center; gap: 17px; color: rgba(250,246,236,.72); font-size: 9px; letter-spacing: .16em; }
-.gateway__index i { color: var(--gold); font-style: normal; }
 .gateway__reveal-copy { position: absolute; z-index: 4; left: 53%; top: 50%; width: min(680px, 50vw); padding: 28px 36px 32px; transform: translateY(22px); opacity: 0; color: var(--cream); pointer-events: none; text-shadow: 0 2px 18px rgba(0,0,0,.75); }
 .gateway__reveal-copy::before { content: ''; position: absolute; z-index: -1; inset: 0 -90px 0 -24px; background: linear-gradient(90deg, rgba(7,18,10,.9), rgba(7,18,10,.72) 65%, rgba(7,18,10,0)); border-left: 1px solid rgba(215,165,29,.72); }
 .gateway__reveal-copy span { display: inline-flex; align-items: center; gap: 10px; color: #f2cd68; background: rgba(9,24,14,.88); border: 1px solid rgba(215,165,29,.65); border-radius: 99px; padding: 8px 13px; font-size: 9px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; margin-bottom: 17px; }
@@ -73,6 +69,31 @@
   line-height: 1.55;
   color: var(--charcoal);
   margin-bottom: 20px;
+}
+
+.story__lead::first-letter {
+  float: left;
+  margin: 0.07em 0.11em 0 0;
+  color: var(--cream);
+  background-color: var(--forest);
+  border-radius: 0.06em;
+  padding: 0.025em 0.09em 0;
+  font-family: var(--font-display);
+  font-size: 2.85em;
+  font-weight: 500;
+  line-height: 0.78;
+}
+
+@media (max-width: 768px) {
+  .story__lead::first-letter {
+    font-size: 2.65em;
+  }
+}
+
+@media (max-width: 480px) {
+  .story__lead::first-letter {
+    font-size: 2.45em;
+  }
 }
 
 .story__body {
@@ -144,15 +165,14 @@
 }
 
 @media (max-width: 768px) {
+  .gateway__reveal-copy, .gateway__cursor { display: none; }
   .gateway { min-height: 680px; height: 100svh; align-items: center; }
   .gateway__copy { width: auto; margin: 30px 27px 60px; }
   .gateway__brand-mark { width: 56px; height: 56px; margin-bottom: 23px; }
-  .gateway__eyebrow { font-size: 8px; letter-spacing: .14em; gap: 7px; }
   .gateway h1 { font-size: clamp(2.85rem, 10vw, 4.5rem); }
   .gateway__copy p { max-width: 430px; font-size: 13px; }
   .gateway__veil { background: linear-gradient(90deg, rgba(10,22,12,.82), rgba(10,22,12,.5)), linear-gradient(0deg, rgba(12,23,13,.55), transparent 62%); }
   .gateway__pool-image, .gateway__lake-panel { display: none; }
-  .gateway__reveal-copy, .gateway__index, .gateway__cursor { display: none; }
   .gateway__scroll-cue { left: 27px; bottom: 24px; }
   .gateway__gate img { object-position: 56% center; }
   .gateway__gate--right img { object-position: 56% center; }

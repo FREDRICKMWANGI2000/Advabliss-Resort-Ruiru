@@ -1,28 +1,8 @@
 import React, { useState } from 'react';
-import {
-  Clock,
-  Users,
-  Compass,
-  Wind,
-  Trees,
-  Smile,
-  Anchor,
-  Waves,
-  Flag,
-} from 'lucide-react';
+import { Clock, Users } from 'lucide-react';
 import { ACTIVITIES } from '../../data/siteData';
 import { SplitText, GradientText, AnimatedContent, ScrollExpandImage } from '../ui/ReactBits';
 import './Activities.css';
-
-const ACTIVITY_ICON_MAP = {
-  Compass,
-  Wind,
-  Trees,
-  Smile,
-  Anchor,
-  Waves,
-  Flag,
-};
 
 export default function Activities() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -33,11 +13,10 @@ export default function Activities() {
         {/* Editorial Split Header */}
         <div className="editorial-header-split">
           <div>
-            <span className="section-eyebrow">Games &amp; Outdoor Pursuits</span>
             <h2 className="section-title">
               <SplitText text="Canopy Trails &" delay={45} />{' '}
               <em>
-                <GradientText variant="dark">Waterside Leisure</GradientText>
+                <span className="highlight-marker"><GradientText variant="dark">Waterside Leisure</GradientText></span>
               </em>
             </h2>
           </div>
@@ -49,7 +28,6 @@ export default function Activities() {
         {/* Asymmetrical Editorial Activity Showcase */}
         <div className="activities__showcase">
           {ACTIVITIES.map((act, i) => {
-            const IconComp = ACTIVITY_ICON_MAP[act.iconName] || Flag;
             const isFeatured = Boolean(act.featured || i === 0);
             const isSelected = activeIndex === i;
 
@@ -81,19 +59,13 @@ export default function Activities() {
                       alt={act.name}
                       className="activities__img"
                     />
-                    <span className="activities__index">{String(i + 1).padStart(2, '0')}</span>
                   </div>
 
                   <div className="activities__copy">
-                    <div className="activities__kicker">
-                      <IconComp size={14} strokeWidth={1.75} />
-                      <span>Outdoor Experience</span>
-                    </div>
-
                     <h3 className="activities__name">{act.name}</h3>
                     <p className="activities__desc">{act.desc}</p>
 
-                    {(act.duration || act.ageMin || act.price) && (
+                    {(act.duration || act.ageMin) && (
                       <div className="activities__meta">
                         {act.duration && (
                           <span>
@@ -106,9 +78,6 @@ export default function Activities() {
                             <Users size={13} />
                             Ages {act.ageMin}+
                           </span>
-                        )}
-                        {act.price && (
-                          <span className="activities__price-tag">${act.price} / session</span>
                         )}
                       </div>
                     )}
