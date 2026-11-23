@@ -15,7 +15,7 @@ services:
       - key: RESORT_EMAIL
         value: fredifytechnologies@gmail.com
       - key: MAIL_FROM
-        sync: false
+        value: onboarding@resend.dev
       - key: RESEND_CONTACT_TEMPLATE_ID
         value: website-enquiry-notification
       - key: RESEND_ACCOMMODATION_TEMPLATE_ID

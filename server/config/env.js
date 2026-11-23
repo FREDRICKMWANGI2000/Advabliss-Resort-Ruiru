@@ -19,7 +19,7 @@ module.exports = {
   isProduction: process.env.NODE_ENV === "production",
   port: process.env.PORT || 5000,
   resendApiKey: process.env.RESEND_API_KEY,
-  // Sender must be a verified Resend domain in production
+  // Resend's test sender works only for testing; production needs a verified domain.
   mailFrom: process.env.MAIL_FROM || "onboarding@resend.dev",
   // Inbox that receives enquiries (comma separated list allowed)
   mailTo: recipient
