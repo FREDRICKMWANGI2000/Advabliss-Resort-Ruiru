@@ -1,14 +1,7 @@
 import React, { useEffect } from 'react';
-import { X, BedDouble, UtensilsCrossed, CalendarHeart, Compass, ArrowUpRight, Phone } from 'lucide-react';
-import { CONTACT_INFO, formatKSh } from '../../data/siteData';
+import { X, Phone } from 'lucide-react';
+import { CONTACT_INFO } from '../../data/siteData';
 import './BookNowModal.css';
-
-const ICON_MAP = {
-  accommodation: BedDouble,
-  restaurant: UtensilsCrossed,
-  events: CalendarHeart,
-  activities: Compass,
-};
 
 export default function BookNowModal({ isOpen, onClose }) {
   useEffect(() => {
@@ -44,27 +37,19 @@ export default function BookNowModal({ isOpen, onClose }) {
 
   const options = [
     {
-      title: 'Rooms & Luxury Suites',
-      desc: 'Reserve a Garden View Room, Deluxe Suite, Family Suite, or Event Stay',
-      meta: `From ${formatKSh(3500)} / night`,
+      title: 'Rooms & suites',
       section: 'accommodation',
     },
     {
-      title: 'Restaurant & Garden Bar',
-      desc: 'Reserve an indoor table or al fresco terrace dining experience',
-      meta: 'Lunch, Dinner & Sundowners',
+      title: 'Restaurant & bar',
       section: 'restaurant',
     },
     {
-      title: 'Weddings, Meetings & Events',
-      desc: 'Enquire for weddings, corporate retreats, private parties, or garden hire',
-      meta: '10 to 1,000 guests',
+      title: 'Events',
       section: 'events',
     },
     {
-      title: 'Games & Outdoor Activities',
-      desc: 'Explore canopy rope bridges, ziplining, boat rides & all-day passes',
-      meta: `Day Pass ${formatKSh(1500)} / person`,
+      title: 'Activities',
       section: 'activities',
     },
   ];
@@ -89,16 +74,15 @@ export default function BookNowModal({ isOpen, onClose }) {
 
         <div className="modal__header">
           <h2 id="book-modal-title" className="modal__title">
-            Begin Your <em>Reservation</em>
+            Make a <em>booking</em>
           </h2>
           <p className="modal__sub">
-            Select the experience you wish to arrange and our team will guide you directly to the reservation desk.
+            What would you like to book? Choose an option to get started.
           </p>
         </div>
 
         <div className="modal__options">
           {options.map((opt) => {
-            const IconComponent = ICON_MAP[opt.section] || BedDouble;
             return (
               <button
                 type="button"
@@ -106,24 +90,14 @@ export default function BookNowModal({ isOpen, onClose }) {
                 className="modal__option"
                 onClick={() => scrollTo(opt.section)}
               >
-                <span className="modal__option-icon">
-                  <IconComponent size={20} strokeWidth={1.6} />
-                </span>
-                <div className="modal__option-body">
-                  <div className="modal__option-top">
-                    <span className="modal__option-title">{opt.title}</span>
-                    <span className="modal__option-meta">{opt.meta}</span>
-                  </div>
-                  <div className="modal__option-desc">{opt.desc}</div>
-                </div>
-                <ArrowUpRight size={18} className="modal__option-arrow" />
+                <span className="modal__option-title">{opt.title}</span>
               </button>
             );
           })}
         </div>
 
         <div className="modal__footer">
-          <span>Prefer immediate assistance?</span>
+          <span>Need help? Call us</span>
           <a href={`tel:${CONTACT_INFO.phone.replace(/\s+/g, '')}`} className="modal__tel">
             <Phone size={13} />
             <span>{CONTACT_INFO.phoneDisplay}</span>

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Phone, MessageCircle, Calendar } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { Phone, MessageCircle, Calendar, ArrowUp } from 'lucide-react';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import BookNowModal from './components/ui/BookNowModal';
@@ -20,6 +20,14 @@ import Contact from './components/sections/Contact';
 
 export default function App() {
   const [bookModalOpen, setBookModalOpen] = useState(false);
+  const [showBackToTop, setShowBackToTop] = useState(false);
+
+  useEffect(() => {
+    const updateVisibility = () => setShowBackToTop(window.scrollY > 400);
+    updateVisibility();
+    window.addEventListener('scroll', updateVisibility, { passive: true });
+    return () => window.removeEventListener('scroll', updateVisibility);
+  }, []);
 
   return (
     <div className="app">
@@ -45,6 +53,17 @@ export default function App() {
         isOpen={bookModalOpen}
         onClose={() => setBookModalOpen(false)}
       />
+
+      {showBackToTop && !bookModalOpen && (
+        <button
+          type="button"
+          className="back-to-top"
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          aria-label="Back to top"
+        >
+          <ArrowUp size={18} />
+        </button>
+      )}
 
       {/* Refined Non-Obstructive Mobile Bottom Action Dock */}
       <div className="mobile-action-dock" role="region" aria-label="Quick reservation actions">
