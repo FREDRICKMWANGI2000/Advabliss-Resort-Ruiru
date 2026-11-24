@@ -41,7 +41,7 @@ async function sendWithTestModeFallback(client, payload) {
   if (result && result.error && typeof result.error.message === "string") {
     if (result.error.message.includes("You can only send testing emails to your own email address")) {
       const match = result.error.message.match(/own email address \(([^)]+)\)/);
-      const ownerEmail = match ? match[1] : "mwangifr123@gmail.com";
+      const ownerEmail = match ? match[1] : "fredifytechnologies@gmail.com";
       console.warn(`[email] Resend test-mode restriction: Re-routing notification from ${Array.isArray(payload.to) ? payload.to.join(", ") : payload.to} to verified account owner ${ownerEmail}. To send to other addresses, verify your domain at resend.com/domains.`);
       const retryPayload = { ...payload, to: [ownerEmail] };
       result = await client.emails.send(retryPayload);
