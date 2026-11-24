@@ -33,6 +33,24 @@ function getResendClient() {
 }
 
 /**
+ * Helper to handle Resend test-mode restrictions (onboarding@resend.dev)
+ * If sending to an unverified recipient in test mode, automatically routes to the Resend account owner.
+ */
+async function sendWithTestModeFallback(client, payload) {
+  let result = await client.emails.send(payload);
+  if (result && result.error && typeof result.error.message === "string") {
+    if (result.error.message.includes("You can only send testing emails to your own email address")) {
+      const match = result.error.message.match(/own email address \(([^)]+)\)/);
+      const ownerEmail = match ? match[1] : "mwangifr123@gmail.com";
+      console.warn(`[email] Resend test-mode restriction: Re-routing notification from ${Array.isArray(payload.to) ? payload.to.join(", ") : payload.to} to verified account owner ${ownerEmail}. To send to other addresses, verify your domain at resend.com/domains.`);
+      const retryPayload = { ...payload, to: [ownerEmail] };
+      result = await client.emails.send(retryPayload);
+    }
+  }
+  return result;
+}
+
+/**
  * Sends the Admin Notification to MAIL_TO.
  * Uses Resend template if configured; falls back cleanly to branded HTML.
  */
@@ -57,13 +75,13 @@ async function sendAdminNotification({ templateName, subject, variables, replyTo
       ...(replyTo ? { replyTo: sanitizeHeader(replyTo) } : {}),
     };
 
-    const { data, error } = await client.emails.send(payload);
+    const { data, error } = await sendWithTestModeFallback(client, payload);
     if (error) {
       console.warn(`[email] Resend template (${templateName} / ${templateId}) send failed: ${error.message}. Attempting branded HTML fallback.`);
       // If template fails, fall back to branded HTML email so message is not lost
       if (typeof fallbackEmailBuilder === "function") {
         const fallback = fallbackEmailBuilder();
-        const fallbackResult = await client.emails.send({
+        const fallbackResult = await sendWithTestModeFallback(client, {
           from: config.mailFrom,
           to: config.mailTo,
           subject: fallback.subject,
@@ -90,7 +108,7 @@ async function sendAdminNotification({ templateName, subject, variables, replyTo
   // Fallback when template is not configured: Send high-quality branded HTML email
   if (typeof fallbackEmailBuilder === "function") {
     const fallback = fallbackEmailBuilder();
-    const { data, error } = await client.emails.send({
+    const { data, error } = await sendWithTestModeFallback(client, {
       from: config.mailFrom,
       to: config.mailTo,
       subject: fallback.subject,
@@ -183,8 +201,11 @@ exports.contactForm = async (req, res) => {
       subject: `New website enquiry from ${name} [${requestId}]`,
       variables: {
         REQUEST_ID: requestId,
+        GUEST_NAME: name,
         NAME: name,
+        FULL_NAME: name,
         PHONE: phone || "Not provided",
+        GUEST_EMAIL: email || "Not provided",
         EMAIL: email || "Not provided",
         MESSAGE: message,
       },
@@ -261,17 +282,21 @@ exports.accommodationForm = async (req, res) => {
       subject: `New accommodation reservation request — ${room.name} [${requestId}]`,
       variables: {
         REQUEST_ID: requestId,
-        FULL_NAME: fullName,
+        RESIDENCE: room.name,
         ROOM_TYPE: room.name,
         ROOM_SLUG: room.id,
+        GUEST_NAME: fullName,
+        FULL_NAME: fullName,
+        NAME: fullName,
+        PHONE: phone,
+        GUEST_EMAIL: email,
+        EMAIL: email,
         CHECK_IN: checkInDate,
         CHECK_OUT: checkOutDate,
         NIGHTS: String(nights),
         ADULTS: String(adults),
         CHILDREN: String(children),
         ESTIMATED_TOTAL: estimatedTotal ? formatKSh(estimatedTotal) : "On enquiry",
-        PHONE: phone,
-        EMAIL: email,
         SPECIAL_REQUESTS: specialRequests || "None",
       },
       replyTo: email,
@@ -390,14 +415,23 @@ exports.restaurantForm = async (req, res) => {
       subject: `New restaurant reservation request — ${fullName} (${guestsText}) [${requestId}]`,
       variables: {
         REQUEST_ID: requestId,
+        GUEST_NAME: fullName,
         FULL_NAME: fullName,
-        DATE: date,
-        TIME: time,
-        GUESTS: guestsText,
-        SEATING_AREA: seatingArea,
-        OCCASION: occasion || "None",
+        NAME: fullName,
+        CONTACT_PHONE: phone,
         PHONE: phone,
+        CONFIRMATION_EMAIL: email,
+        GUEST_EMAIL: email,
         EMAIL: email,
+        SEATING_PREFERENCE: seatingArea,
+        SEATING_AREA: seatingArea,
+        DINING_DATE: date,
+        DATE: date,
+        PREFERRED_TIME: time,
+        TIME: time,
+        NUMBER_OF_GUESTS: guestsText,
+        GUESTS: guestsText,
+        OCCASION: occasion || "None",
         SPECIAL_REQUESTS: specialRequests || "None",
       },
       replyTo: email,
@@ -504,12 +538,17 @@ exports.meetingForm = async (req, res) => {
         REQUEST_ID: requestId,
         EVENT_TYPE: eventType,
         FULL_NAME: fullName,
+        GUEST_NAME: fullName,
+        NAME: fullName,
         EMAIL: email,
+        GUEST_EMAIL: email,
         PHONE: phone,
         EVENT_DATE: eventDate,
+        DATE: eventDate,
         GUESTS: String(guestCount),
         ENHANCEMENTS_TOTAL: formatKSh(addonsTotal),
         DETAILS: details || "None",
+        SPECIAL_REQUESTS: details || "None",
       },
       replyTo: email,
       fallbackEmailBuilder: () =>
