@@ -171,37 +171,38 @@ export default function Restaurant() {
     setLoading(true);
     try {
       const apiBase = import.meta.env.VITE_API_URL || '';
-      const occasionText =
-        resForm.occasion !== 'None'
-          ? `${resForm.seatingArea} · ${resForm.occasion}`
-          : resForm.seatingArea;
-
-      await axios.post(`${apiBase}/api/book-restaurant`, {
+      const response = await axios.post(`${apiBase}/api/book-restaurant`, {
         fullName: resForm.name,
         date: resForm.date,
         time: resForm.time,
         guests: `${resForm.guests} ${Number(resForm.guests) === 1 ? 'Guest' : 'Guests'}`,
-        occasion: occasionText,
+        seatingArea: resForm.seatingArea,
+        occasion: resForm.occasion,
         phone: resForm.phone,
         email: resForm.email,
         requests: resForm.requests || 'None',
       });
 
+      const resData = response.data;
       setConfirmedReservation({
-        name: resForm.name,
+        requestId: resData.requestId,
+        name: resData.reservation?.fullName || resForm.name,
         email: resForm.email,
         phone: resForm.phone,
-        date: resForm.date,
-        time: resForm.time,
-        guests: resForm.guests,
-        seatingArea: resForm.seatingArea,
-        occasion: resForm.occasion,
+        date: resData.reservation?.date || resForm.date,
+        time: resData.reservation?.time || resForm.time,
+        guests: resData.reservation?.guests || `${resForm.guests} ${Number(resForm.guests) === 1 ? 'Guest' : 'Guests'}`,
+        seatingArea: resData.reservation?.seatingArea || resForm.seatingArea,
+        occasion: resData.reservation?.occasion || resForm.occasion,
+        emailStatus: resData.emailStatus,
       });
     } catch (error) {
       console.error(error);
+      const serverMessage = error.response?.data?.message;
       setSubmitError(
-        'Unable to submit your table reservation online at this moment. Please call concierge directly at ' +
-          CONTACT_INFO.phone
+        serverMessage ||
+          'Unable to submit your table reservation online at this moment. Please call concierge directly at ' +
+            CONTACT_INFO.phone
       );
     } finally {
       setLoading(false);
@@ -780,6 +781,11 @@ export default function Restaurant() {
                   <CheckCircle2 size={32} />
                 </div>
                 <h4 className="voucher__title">Table Reservation Received</h4>
+                {confirmedReservation.requestId && (
+                  <p style={{ fontSize: '12px', letterSpacing: '1px', textTransform: 'uppercase', color: 'var(--gold)', margin: '4px 0 12px', fontWeight: 600 }}>
+                    Reference: {confirmedReservation.requestId}
+                  </p>
+                )}
                 <p className="voucher__lead">
                   Thank you, <strong>{confirmedReservation.name}</strong>. Your table request for{' '}
                   <strong>{confirmedReservation.guests}</strong> at{' '}
@@ -802,7 +808,9 @@ export default function Restaurant() {
                   </div>
                 </div>
                 <p className="voucher__note">
-                  Our restaurant concierge will contact you within 2 hours to confirm your seating and accommodate any special dietary preferences.
+                  {confirmedReservation.emailStatus?.guest
+                    ? 'An acknowledgement has been dispatched to your email. Our restaurant concierge will contact you within 2 hours to confirm your seating.'
+                    : 'Our restaurant concierge will contact you within 2 hours via phone or WhatsApp to confirm your seating and accommodate any special dietary preferences.'}
                 </p>
                 <button
                   type="button"

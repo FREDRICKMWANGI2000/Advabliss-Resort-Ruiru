@@ -61,11 +61,13 @@ export default function Contact() {
         }),
       });
 
-      const data = await response.json();
-      if (data.success) {
+      const data = await response.json().catch(() => null);
+      if (response.ok && data?.success) {
         setSubmittedDetails({
+          requestId: data.requestId,
           name: form.name,
           email: form.email,
+          emailStatus: data.emailStatus,
         });
         setForm({
           name: '',
@@ -74,7 +76,7 @@ export default function Contact() {
           message: '',
         });
       } else {
-        setSubmitError('Failed to send message. Please try again.');
+        setSubmitError(data?.message || 'Failed to send message. Please try again.');
       }
     } catch (error) {
       console.error(error);
@@ -221,9 +223,18 @@ export default function Contact() {
                     <CheckCircle2 size={30} />
                   </div>
                   <h4>Message Received</h4>
+                  {submittedDetails.requestId && (
+                    <p style={{ fontSize: '12px', letterSpacing: '1px', textTransform: 'uppercase', color: 'var(--gold)', margin: '4px 0 10px', fontWeight: 600 }}>
+                      Reference: {submittedDetails.requestId}
+                    </p>
+                  )}
                   <p>
-                    Thank you, <strong>{submittedDetails.name}</strong>! Our hospitality team has received your enquiry and will respond to{' '}
-                    <strong>{submittedDetails.email}</strong> within 2 hours.
+                    Thank you, <strong>{submittedDetails.name}</strong>! Our hospitality team has received your enquiry
+                    {submittedDetails.email ? (
+                      <> and will respond to <strong>{submittedDetails.email}</strong> within 2 hours.</>
+                    ) : (
+                      <> and will reach you directly via phone.</>
+                    )}
                   </p>
                   <button
                     type="button"

@@ -94,7 +94,7 @@ export default function Accommodation() {
     setLoading(true);
     try {
       const apiBase = import.meta.env.VITE_API_URL || '';
-      await axios.post(`${apiBase}/api/book-accommodation`, {
+      const response = await axios.post(`${apiBase}/api/book-accommodation`, {
         fullName: values.fullName,
         accommodationType: values.accommodationType,
         checkInDate: values.checkIn,
@@ -105,18 +105,25 @@ export default function Accommodation() {
         email: values.email,
       });
 
+      const resData = response.data;
       setSubmittedGuest({
-        fullName: values.fullName,
+        requestId: resData.requestId,
+        fullName: resData.reservation?.fullName || values.fullName,
         email: values.email,
-        roomName: activeRoom?.name || values.accommodationType,
-        checkIn: values.checkIn,
-        checkOut: values.checkOut,
+        roomName: resData.reservation?.roomType || activeRoom?.name || values.accommodationType,
+        checkIn: resData.reservation?.checkInDate || values.checkIn,
+        checkOut: resData.reservation?.checkOutDate || values.checkOut,
+        nights: resData.reservation?.nights,
+        estimatedTotal: resData.reservation?.estimatedTotal,
+        emailStatus: resData.emailStatus,
       });
     } catch (err) {
       console.error(err);
+      const serverMessage = err.response?.data?.message;
       setSubmitError(
-        'We could not transmit your reservation request right now. Please try again or reach our desk directly at ' +
-          CONTACT_INFO.phoneDisplay
+        serverMessage ||
+          'We could not transmit your reservation request right now. Please try again or reach our desk directly at ' +
+            CONTACT_INFO.phoneDisplay
       );
     } finally {
       setLoading(false);
@@ -312,10 +319,21 @@ export default function Accommodation() {
                   <CheckCircle2 size={32} />
                 </div>
                 <h3>Reservation Request Received</h3>
+                {submittedGuest.requestId && (
+                  <p style={{ fontSize: '12px', letterSpacing: '1px', textTransform: 'uppercase', color: 'var(--gold)', margin: '4px 0 12px', fontWeight: 600 }}>
+                    Reference: {submittedGuest.requestId}
+                  </p>
+                )}
                 <p>
-                  Thank you, <strong>{submittedGuest.fullName}</strong>. Our reservations team has received your request for the{' '}
-                  <strong>{submittedGuest.roomName}</strong> ({submittedGuest.checkIn} to {submittedGuest.checkOut}) and will contact you at{' '}
-                  <strong>{submittedGuest.email}</strong> within 2 hours.
+                  Thank you, <strong>{submittedGuest.fullName}</strong>. Our reservations team has received your stay request for the{' '}
+                  <strong>{submittedGuest.roomName}</strong> ({submittedGuest.checkIn} to {submittedGuest.checkOut})
+                  {submittedGuest.nights ? ` for ${submittedGuest.nights} ${submittedGuest.nights === 1 ? 'night' : 'nights'}` : ''}
+                  {submittedGuest.estimatedTotal ? ` (Estimated ${formatKSh(submittedGuest.estimatedTotal)})` : ''}.
+                  {submittedGuest.emailStatus?.guest ? (
+                    <> An acknowledgement summary has been sent to <strong>{submittedGuest.email}</strong>.</>
+                  ) : (
+                    <> Our reservations desk will contact you directly via phone or WhatsApp to confirm room availability and payment.</>
+                  )}
                 </p>
                 <button
                   type="button"

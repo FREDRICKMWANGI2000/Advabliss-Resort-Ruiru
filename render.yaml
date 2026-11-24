@@ -12,7 +12,7 @@ services:
         value: production
       - key: RESEND_API_KEY
         sync: false
-      - key: RESORT_EMAIL
+      - key: MAIL_TO
         value: fredifytechnologies@gmail.com
       - key: MAIL_FROM
         value: onboarding@resend.dev
@@ -22,5 +22,7 @@ services:
         value: reservation-inquiry
       - key: RESEND_RESTAURANT_TEMPLATE_ID
         value: table-reservation-notice
+      - key: RESEND_MEETING_TEMPLATE_ID
+        sync: false
       - key: CORS_ORIGINS
-        value: https://advabliss.com,https://www.advabliss.com
+        value: https://advabliss-resort-ruiru.vercel.app,https://advabliss.com,https://www.advabliss.com

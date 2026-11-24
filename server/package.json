@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "nodemon index.js",
     "start": "node index.js",
+    "test": "node test/forms.test.js",
     "check": "node --check index.js && node --check controllers/formController.js"
   },
   "keywords": [],
